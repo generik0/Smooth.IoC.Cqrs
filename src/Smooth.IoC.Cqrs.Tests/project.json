@@ -1,13 +1,60 @@
 ﻿{
   "version": "1.0.0-*",
-
-  "dependencies": {
-    "NETStandard.Library": "1.6.0"
+  "title": "Smooth.IoC.Dapper.Cqrs.Tests",
+  "authors": [ "Rik Svendsen Rose" ],
+  "packOptions": {
+    "owners": [ "gernerik0" ],
+    "licenseUrl": "http://www.opensource.org/licenses/MIT",
+    "iconUrl": "https://raw.githubusercontent.com/Generik0/Smooth.IoC.Cqrs/master/logo.jpg",
+    "requireLicenseAcceptance": false,
+    "summary": "The smoothest IoC Cqrs factory Tests."
+  },
+  "configurations": {
+    "Debug": {
+      "buildOptions": {
+        "define": [ "DEBUG", "TRACE" ],
+        "copyToOutput": {
+          "include": [ ]
+        }
+      }
+    }
   },
 
+  "testRunner": "nunit",
+
+
   "frameworks": {
-    "netstandard1.6": {
-      "imports": "dnxcore50"
+    "net452": {
+      "frameworkAssemblies": {
+      },
+      "dependencies": {
+        "Castle.Core": "3.3.3",
+        "Castle.Windsor": "3.3.0"
+      }
     }
+  },
+  "scripts": {
+    "postcompile": [
+    ] 
+  },
+  "description": "The smoothest IoC Cqrs factory using Castle. VS2015 or an equivalent build environment is recommended.",
+  "buildOptions": {
+    "xmlDoc": true,
+    "nowarn": [ "CS1591" ]
+  },
+  "dependencies": {
+    "Autofac": "4.2.1",
+    "dotnet-test-nunit": "3.4.0-beta-3",
+    "FakeItEasy": "2.3.2",
+    "FluentAssertions": "4.18.0",
+    "Microsoft.CodeAnalysis.CSharp": "1.3.2",
+    "Ninject.Extensions.Conventions": "3.2.0",
+    "Ninject.Extensions.Factory": "3.2.1",
+    "Ninject.Extensions.Interception": "3.2.0",
+    "NUnit": "3.5.0",
+    "SimpleInjector": "3.3.2",
+    "Smooth.IoC.Cqrs": "0.1.0-*",
+    "StructureMap": "4.4.2",
+    "Unity": "4.0.1"
   }
 }
