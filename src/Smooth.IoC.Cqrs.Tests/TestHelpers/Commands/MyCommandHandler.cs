@@ -3,7 +3,7 @@ using Smooth.IoC.Cqrs.Commanding;
 
 namespace Smooth.IoC.Cqrs.Tests.TestHelpers.Commands
 {
-    public class MyCommandHandler : HandlerBase, ICommandHandler<MyCommandModel>
+    public class MyCommandHandler : Handle, ICommandHandler<MyCommandModel>
     {
         public MyCommandHandler(IHandlerFactory handlerFactory) : base(handlerFactory)
         {

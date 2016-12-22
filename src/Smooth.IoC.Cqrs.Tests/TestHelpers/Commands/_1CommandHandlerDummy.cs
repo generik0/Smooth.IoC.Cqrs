@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Smooth.IoC.Cqrs.Commanding;
 
 namespace Smooth.IoC.Cqrs.Tests.TestHelpers.Commands
 {
-    public class _1CommandHandlerDummy : HandlerBase, ICommandHandler<_CommandModelDummy>
+    public class _1CommandHandlerDummy : Handle, ICommandHandler<_CommandModelDummy>
     {
         public _1CommandHandlerDummy(IHandlerFactory handlerFactory) : base(handlerFactory)
         {

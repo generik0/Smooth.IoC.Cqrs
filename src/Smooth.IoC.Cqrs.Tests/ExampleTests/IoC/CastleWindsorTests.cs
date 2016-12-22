@@ -63,5 +63,30 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
             Assert.DoesNotThrowAsync(async () => await commandHandler.ExecuteAsync(actual));
             actual.Value.Should().Be(3);
         }
+
+        [Test]
+        public void IHandle_OpenClose_ExecuteAsync_Executes_Correctly()
+        {
+            var actual = new MyCommandModel
+            {
+                Value = 3
+            };
+            var handles = _container.ResolveAll<IHandle>();
+            var handle = handles.FirstOrDefault(x => x.IsHandel<MyCommandHandler>()) as MyCommandHandler;
+            Assert.DoesNotThrowAsync(async () => await handle.ExecuteAsync(actual));
+            actual.Value.Should().Be(4);
+        }
+
+        [Test]
+        public void ICommandHandler_OpenClose_ExecuteAsync_Executes_Correctly()
+        {
+            var actual = new MyCommandModel
+            {
+                Value = 4
+            };
+            var handle = _container.Resolve<ICommandHandler<MyCommandModel>>();
+            Assert.DoesNotThrowAsync(async () => await handle.ExecuteAsync(actual));
+            actual.Value.Should().Be(5);
+        }
     }
 }
