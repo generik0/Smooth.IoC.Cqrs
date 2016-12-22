@@ -1,0 +1,62 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Smooth.IoC.Cqrs.Exceptions;
+using Smooth.IoC.Cqrs.Requests;
+
+namespace Smooth.IoC.Cqrs.Query
+{
+    public class QueryDispatcher : IQueryDispatcher
+    {
+        private readonly IHandlerFactory _factory;
+
+        public QueryDispatcher(IHandlerFactory factory)
+        {
+            _factory = factory;
+        }
+
+        public Task<IReadOnlyCollection<TResult>> QueryAsync<TQuery, TResult>() where TQuery : IQuery where TResult : class
+        {
+            using (var handler = _factory.ResolveQuery<TQuery, TResult>())
+            {
+                if (handler == null)
+                {
+                    throw new RequestHandlerNotFoundException(typeof(TQuery));
+                }
+                return handler.QueryAsync();
+            }
+        }
+
+        public Task<IReadOnlyCollection<TResult>> QueryAsync<TQuery, TResult>(TQuery query) where TQuery : IQuery where TResult : class
+        {
+            if (query == null)
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+            using (var handler = _factory.ResolveQuery<TQuery, TResult>())
+            {
+                if (handler == null)
+                {
+                    throw new RequestHandlerNotFoundException(typeof(TQuery));
+                }
+                return handler.QueryAsync(query);
+            }
+        }
+
+        public Task<TResult> QuerySingleOrDefaultAsync<TQuery, TResult>(TQuery query) where TQuery : IQuery where TResult : class
+        {
+            if (query == null)
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+            using (var handler = _factory.ResolveQuery<TQuery, TResult>())
+            {
+                if (handler == null)
+                {
+                    throw new RequestHandlerNotFoundException(typeof(TQuery));
+                }
+                return handler.QuerySingleOrDefaultAsync(query);
+            }
+        }
+    }
+}

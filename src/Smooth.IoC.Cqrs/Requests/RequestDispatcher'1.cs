@@ -21,7 +21,7 @@ namespace Smooth.IoC.Cqrs.Requests
             {
                 throw new ArgumentNullException(nameof(request));
             }
-            using (var handler = _factory.Resolve<TRequest, TReply>())
+            using (var handler = _factory.ResolveRequest <TRequest, TReply>())
             {
                 if (handler == null)
                 {

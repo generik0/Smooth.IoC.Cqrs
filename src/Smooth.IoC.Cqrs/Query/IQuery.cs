@@ -9,11 +9,11 @@ namespace Smooth.IoC.Cqrs.Query
     /// This interface is required so that we can get the request id in a non-generic way.
     /// </remarks>
     /// <seealso cref="Query"/>
-    public interface IQuery
+    public interface IQuery 
     {
         /// <summary>
         /// Get id identifying this request (so that we know when we get the correct reply).
         /// </summary>
-        Guid RequestId { get; }
+        Guid QuerytId { get; }
     }
 }

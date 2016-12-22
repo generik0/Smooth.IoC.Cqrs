@@ -9,13 +9,13 @@ namespace Smooth.IoC.Cqrs.Query
         /// </summary>
         public Query()
         {
-            RequestId = Guid.NewGuid();
+            QuerytId = Guid.NewGuid();
         }
 
         /// <summary>
         /// Gets unique identifier for this request (so that we can identify replies).
         /// </summary>
-        public Guid RequestId { get; }
+        public Guid QuerytId { get; }
     }
 
 }

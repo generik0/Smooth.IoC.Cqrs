@@ -1,18 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Smooth.IoC.Cqrs.Requests;
 
 namespace Smooth.IoC.Cqrs.Query
 {
-    public interface IRequestHandler<in TRequest, TReply> : IDisposable 
-        where TRequest : IRequest
-        where TReply : class
+    public interface IQueryHandler<in TQuery, TResult> : IDisposable 
+        where TQuery : IQuery
+        where TResult : class
     {
         /// <summary>
-        /// Execute a command asynchronously.
+        /// Execute a query asynchronously.
         /// </summary>
-        /// <param name="request">Command to execute.</param>
-        /// <returns>Task which will be completed once the command has been executed.</returns>
-        Task<TReply> ExecuteAsync(TRequest request);
+        /// <returns>Task which will be completed once the query has been executed.</returns>
+        Task<IReadOnlyCollection<TResult>> QueryAsync();
+
+        /// <summary>
+        /// Execute a query asynchronously.
+        /// </summary>
+        /// <param name="query">Command to execute.</param>
+        /// <returns>Task which will be completed once the query has been executed.</returns>
+        Task<IReadOnlyCollection<TResult>> QueryAsync(TQuery query);
+
+        /// <summary>
+        /// Execute a query asynchronously.
+        /// </summary>
+        /// <param name="query">Command to execute.</param>
+        /// <returns>Task which will be completed once the query has been executed.</returns>
+        Task<TResult> QuerySingleOrDefaultAsync(TQuery query);
     }
 }
