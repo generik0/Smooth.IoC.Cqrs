@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Smooth.IoC.Cqrs.Commanding
 {
-    public interface ICommandHandler<in TCommand> : IDisposable 
+    public interface ICommandHandler<in TCommand> : IHandle
         where TCommand : ICommand
     {
         /// <summary>
