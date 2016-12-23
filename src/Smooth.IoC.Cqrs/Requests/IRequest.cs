@@ -15,5 +15,6 @@ namespace Smooth.IoC.Cqrs.Requests
         /// Get id identifying this request (so that we know when we get the correct reply).
         /// </summary>
         Guid RequestId { get; }
+        int Version { get; }
     }
 }

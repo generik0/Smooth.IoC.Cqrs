@@ -2,20 +2,36 @@
 
 namespace Smooth.IoC.Cqrs.Requests
 {
-    public class Request : IRequest
+    public abstract class Request : IRequest
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Request"/> class.
-        /// </summary>
-        public Request()
+        protected Request()
         {
             RequestId = Guid.NewGuid();
+        }
+
+        protected Request(int version)
+        {
+            Version = version;
+            RequestId = Guid.NewGuid();
+        }
+
+        protected Request(Guid requestId)
+        {
+            RequestId = requestId;
+        }
+
+        protected Request(Guid requestId, int version)
+        {
+            RequestId = requestId;
+            Version = version;
         }
 
         /// <summary>
         /// Gets unique identifier for this request (so that we can identify replies).
         /// </summary>
         public Guid RequestId { get; }
+
+        public int Version { get; }
     }
 
 }
