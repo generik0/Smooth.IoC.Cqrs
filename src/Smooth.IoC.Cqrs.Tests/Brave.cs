@@ -10,11 +10,11 @@ namespace Smooth.IoC.Cqrs.Tests
     {
         private readonly ICommandDispatcher _dispatcher;
         private readonly ICommandDispatcher<MyCommandModel> _specialDispatcher;
-        private readonly IEnumerable<IHandle> _handlers;
+        private readonly IEnumerable<IHandler> _handlers;
         private readonly ICommandHandler<MyCommandModel> _handler;
 
-        public Brave(ICommandDispatcher dispatcher, ICommandDispatcher<MyCommandModel> specialDispatcher, IEnumerable<IHandle> handlers, 
-            ICommandHandler<MyCommandModel> handler   )
+            public Brave(ICommandDispatcher dispatcher, ICommandDispatcher<MyCommandModel> specialDispatcher, IEnumerable<IHandler> handlers, 
+                ICommandHandler<MyCommandModel> handler   )
         {
             _dispatcher = dispatcher;
             _specialDispatcher = specialDispatcher;
@@ -25,7 +25,6 @@ namespace Smooth.IoC.Cqrs.Tests
         public async void DoDispatch(MyCommandModel cmd)
         {
             await _dispatcher.ExecuteAsync(cmd);
-
         }
 
         public async void DoSpecialDispatch(MyCommandModel cmd)

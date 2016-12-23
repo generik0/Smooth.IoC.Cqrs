@@ -7,7 +7,6 @@ namespace Smooth.IoC.Cqrs.Requests
     public class RequestDispatcher : IRequestDispatcher
     {
         private readonly IHandlerFactory _factory;
-
         public RequestDispatcher(IHandlerFactory factory)
         {
             _factory = factory;

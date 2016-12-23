@@ -2,17 +2,17 @@ using System;
 
 namespace Smooth.IoC.Cqrs
 {
-    public abstract class Handle :  IHandle
+    public abstract class Handler :  IHandler
     {
         private readonly IHandlerFactory _handlerFactory;
         protected bool Disposed;
 
-        protected Handle(IHandlerFactory handlerFactory)
+        protected Handler(IHandlerFactory handlerFactory)
         {
             _handlerFactory = handlerFactory;
         }
 
-        ~Handle()
+        ~Handler()
         {
             Dispose(false);
         }

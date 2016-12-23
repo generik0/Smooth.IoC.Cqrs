@@ -2,7 +2,7 @@
 
 namespace Smooth.IoC.Cqrs
 {
-    public interface IHandle : IDisposable
+    public interface IHandler : IDisposable
     {
         bool IsHandel<THandle>() where THandle : class;
     }
