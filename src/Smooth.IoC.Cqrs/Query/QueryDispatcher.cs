@@ -15,7 +15,7 @@ namespace Smooth.IoC.Cqrs.Query
             _factory = factory;
         }
 
-        public Task<IReadOnlyCollection<TResult>> QueryAsync<TQuery, TResult>() where TQuery : IQuery where TResult : class
+        public Task<IEnumerable<TResult>> QueryAsync<TQuery, TResult>() where TQuery : IQuery where TResult : class
         {
             using (var handler = _factory.ResolveQuery<TQuery, TResult>())
             {
@@ -27,7 +27,7 @@ namespace Smooth.IoC.Cqrs.Query
             }
         }
 
-        public Task<IReadOnlyCollection<TResult>> QueryAsync<TQuery, TResult>(TQuery query) where TQuery : IQuery where TResult : class
+        public Task<IEnumerable<TResult>> QueryAsync<TQuery, TResult>(TQuery query) where TQuery : IQuery where TResult : class
         {
             if (query == null)
             {

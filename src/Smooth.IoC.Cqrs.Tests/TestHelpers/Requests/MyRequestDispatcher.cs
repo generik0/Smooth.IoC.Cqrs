@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Smooth.IoC.Cqrs.Requests;
 
 namespace Smooth.IoC.Cqrs.Tests.TestHelpers.Requests

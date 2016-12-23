@@ -12,14 +12,14 @@ namespace Smooth.IoC.Cqrs.Query
         /// Execute a query asynchronously.
         /// </summary>
         /// <returns>Task which will be completed once the query has been executed.</returns>
-        Task<IReadOnlyCollection<TResult>> QueryAsync();
+        Task<IEnumerable<TResult>> QueryAsync();
 
         /// <summary>
         /// Execute a query asynchronously.
         /// </summary>
         /// <param name="query">Command to execute.</param>
         /// <returns>Task which will be completed once the query has been executed.</returns>
-        Task<IReadOnlyCollection<TResult>> QueryAsync(TQuery query);
+        Task<IEnumerable<TResult>> QueryAsync(TQuery query);
 
         /// <summary>
         /// Execute a query asynchronously.

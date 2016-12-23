@@ -7,10 +7,8 @@ namespace Smooth.IoC.Cqrs.Query
         where TQuery : Query
         where TResult : class
     {
-        Task<IReadOnlyCollection<TResult>> QueryAsync();
-
-        Task<IReadOnlyCollection<TResult>> QueryAsync(TQuery query);
-
+        Task<IEnumerable<TResult>> QueryAsync();
+        Task<IEnumerable<TResult>> QueryAsync(TQuery query);
         Task<TResult> QuerySingleOrDefaultAsync(TQuery query);
     }
 }
