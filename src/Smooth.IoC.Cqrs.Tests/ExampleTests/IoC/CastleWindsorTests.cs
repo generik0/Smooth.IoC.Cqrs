@@ -2,6 +2,7 @@
 using System.Linq;
 using Castle.Core.Internal;
 using Castle.MicroKernel.Registration;
+using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.Windsor;
 using FluentAssertions;
 using NUnit.Framework;
@@ -26,6 +27,7 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
             Assert.DoesNotThrow(() =>
             {
                 _container.Install(new CastleWindsorInstaller());
+                _container.Kernel.Resolver.AddSubResolver(new CollectionResolver(_container.Kernel, true));
                 _container.Register(Classes.FromThisAssembly()
                     .Where(t => t.GetInterfaces().Any(x => x != typeof(IDisposable))
                                 && !t.HasAttribute<NoIoCFluentRegistration>())
@@ -37,6 +39,7 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
                     .LifestyleTransient()
                     .WithServiceAllInterfaces());
             });
+            
         }
 
 
@@ -87,6 +90,24 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
             var handle = _container.Resolve<ICommandHandler<MyCommandModel>>();
             Assert.DoesNotThrowAsync(async () => await handle.ExecuteAsync(actual));
             actual.Value.Should().Be(5);
+        }
+
+        [Test]
+        public void Resolve_IBrave_AndExecuteAllMethodsCorrectly()
+        {
+            var actual = new MyCommandModel
+            {
+                Value = 10
+            };
+            var brave = _container.Resolve<IBrave>();
+            brave.DoDispatch(actual);
+            actual.Value.Should().Be(11);
+            brave.DoSpecialDispatch(actual);
+            actual.Value.Should().Be(12);
+            brave.DoDecoratorDispatch(actual);
+            actual.Value.Should().Be(13);
+            brave.DoExactHandler(actual);
+            actual.Value.Should().Be(14);
         }
     }
 }
