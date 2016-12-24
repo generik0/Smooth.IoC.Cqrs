@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Smooth.IoC.Cqrs.Tap</id>
+    <version>$version$</version>
+    <title>Smooth.IoC.Cqrs.Tap</title>
+    <authors>Rik Svendsen Rose</authors>
+    <owners>Generik0</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/generik0/Smooth.IoC.Dapper.Repository.UnitOfWork</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/Generik0/Smooth.IoC.Dapper.Repository.UnitOfWork/master/logo.jpg</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>Smooth IoC UnitOfWork patterns.</summary>
+    <description>
+      The package provides a solution for the Cqrs principle / patterns together with inversition of control.
+      On the project site there are examples of Castle.Windsor integration. The IoC framework is not an issue... It is ment to integrate nice and smooth like using a factory pattern...
+
+      The library gives you the building blocks to:
+      * Create Command, Query, Request or combined dispatcher injected to your classes.
+      * The dispatcher will complete the call to your handlers, the event engine is based upon .Nets TAP.
+      * Includes multiple ways to utilize the CQRS
+      * Implemented for .net 4.5.2, .net 4.6.1+, .net 1.6 standard+.
+
+      Have a look at the project site's and unit tests for examples.
+    </description>
+    <copyright>Copyright 2016</copyright>
+    <tags>dapper cqrs di ioc autofac castle ninject simpleinjector structuremap unity</tags>
+    <frameworkAssemblies>
+    </frameworkAssemblies>
+    <dependencies>
+      <group targetFramework=".NETFramework4.5">
+      </group>
+      <group targetFramework=".NETFramework4.6">
+      </group>
+	   <group targetFramework=".NETStandard1.6">
+	   </group>
+    </dependencies>
+  </metadata>
+  <files>
+  <!-- netstandard1.6 -->
+    <file src="..\src\Smooth.IoC.Cqrs.Tap\bin\$configuration$\netstandard1.6\Smooth.IoC.Cqrs.Tap.dll" target="lib\netstandard1.6" />
+    <file src="..\src\Smooth.IoC.Cqrs.Tap\bin\$configuration$\netstandard1.6\Smooth.IoC.Cqrs.Tap.xml" target="lib\netstandard1.6" />
+    <file src="..\src\Smooth.IoC.Cqrs.Tap\bin\$configuration$\netstandard1.6\Smooth.IoC.Cqrs.dll" target="lib\netstandard1.6" />
+    <file src="..\src\Smooth.IoC.Cqrs.Tap\bin\$configuration$\netstandard1.6\Smooth.IoC.Cqrs.xml" target="lib\netstandard1.6" />
+    <file src="..\src\Smooth.IoC.Cqrs.Tap\bin\$configuration$\net461\Smooth.IoC.Cqrs.Tap.dll" target="lib\net461" />
+    <file src="..\src\Smooth.IoC.Cqrs.Tap\bin\$configuration$\net461\Smooth.IoC.Cqrs.Tap.xml" target="lib\net461" />
+    <file src="..\src\Smooth.IoC.Cqrs.Tap\bin\$configuration$\net461\Smooth.IoC.Cqrs.dll" target="lib\net461" />
+    <file src="..\src\Smooth.IoC.Cqrs.Tap\bin\$configuration$\net461\Smooth.IoC.Cqrs.xml" target="lib\net461" />
+    <file src="..\src\Smooth.IoC.Cqrs.Tap\bin\$configuration$\net452\Smooth.IoC.Cqrs.Tap.dll" target="lib\net452" />
+    <file src="..\src\Smooth.IoC.Cqrs.Tap\bin\$configuration$\net452\Smooth.IoC.Cqrs.Tap.xml" target="lib\net452" />
+    <file src="..\src\Smooth.IoC.Cqrs.Tap\bin\$configuration$\net452\Smooth.IoC.Cqrs.dll" target="lib\net452" />
+    <file src="..\src\Smooth.IoC.Cqrs.Tap\bin\$configuration$\net452\Smooth.IoC.Cqrs.xml" target="lib\net452" />
+  </files>
+</package>

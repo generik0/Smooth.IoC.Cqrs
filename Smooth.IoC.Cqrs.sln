@@ -5,7 +5,12 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8ECD2580-CE0F-4A87-9CBB-4B143E90AC94}"
 	ProjectSection(SolutionItems) = preProject
+		build\Build.Locally.ps1 = build\Build.Locally.ps1
 		global.json = global.json
+		build\MyGet.Build.ps1 = build\MyGet.Build.ps1
+		build\MyGet.ps1 = build\MyGet.ps1
+		README.md = README.md
+		NuGetSpecs\Smooth.IoC.Cqrs.Tap.nuspec = NuGetSpecs\Smooth.IoC.Cqrs.Tap.nuspec
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5E6BF664-39BD-44D4-8923-CC5A98239AFB}"
