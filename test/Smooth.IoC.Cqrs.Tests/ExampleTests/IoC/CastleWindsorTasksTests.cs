@@ -123,9 +123,9 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
                 Value = 1
             };
             var handler = _container.Resolve<IRequestDispatcher>();
-            MyReplyModel result = null;
-            Assert.DoesNotThrowAsync(async () =>  result = await handler.ExecuteAsync<MyRequestModel, MyReplyModel>(request));
-            result.Actual.Should().Be(2);
+            var actual = MyReplyeEnum.Good;
+            Assert.DoesNotThrowAsync(async () =>  actual = await handler.ExecuteAsync<MyRequestModel, MyReplyeEnum>(request));
+            actual.Should().Be(MyReplyeEnum.Great);
         }
 
         [Test]
@@ -135,10 +135,10 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
             {
                 Value = 2
             };
-            var commandHandler = _container.Resolve<IRequestDispatcher<MyRequestModel, MyReplyModel>>();
-            MyReplyModel result = null;
-            Assert.DoesNotThrowAsync(async () =>  result = await commandHandler.ExecuteAsync(request));
-            result.Actual.Should().Be(3);
+            var commandHandler = _container.Resolve<IRequestDispatcher<MyRequestModel, MyReplyeEnum>>();
+            MyReplyeEnum actual = MyReplyeEnum.Good;
+            Assert.DoesNotThrowAsync(async () =>  actual = await commandHandler.ExecuteAsync(request));
+            actual.Should().Be(MyReplyeEnum.Great);
         }
 
         [Test]
@@ -150,9 +150,9 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
             };
             var handles = _container.ResolveAll<IHandler>();
             var handle = handles.FirstOrDefault(x => x.IsHandel<MyRequestHandler>()) as MyRequestHandler;
-            MyReplyModel result = null;
-            Assert.DoesNotThrowAsync(async () => result = await handle.ExecuteAsync(request));
-            result.Actual.Should().Be(4);
+            var actual = MyReplyeEnum.Good;
+            Assert.DoesNotThrowAsync(async () => actual = await handle.ExecuteAsync(request));
+            actual.Should().Be(MyReplyeEnum.Great);
         }
 
         [Test]
@@ -162,10 +162,10 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
             {
                 Value = 4
             };
-            var handle = _container.Resolve<IRequestHandler<MyRequestModel, MyReplyModel>>();
-            MyReplyModel result = null;
-            Assert.DoesNotThrowAsync(async () => result = await handle.ExecuteAsync(request));
-            result.Actual.Should().Be(5);
+            var handle = _container.Resolve<IRequestHandler<MyRequestModel, MyReplyeEnum>>();
+            MyReplyeEnum actual = MyReplyeEnum.Good;
+            Assert.DoesNotThrowAsync(async () => actual = await handle.ExecuteAsync(request));
+            actual.Should().Be(MyReplyeEnum.Great);
         }
 
         [Test]
@@ -176,10 +176,10 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
                 Value = 10
             };
             var news = _container.Resolve<INew>();
-            news.DoDispatch(request).Actual.Should().Be(11);
-            news.DoSpecialDispatch(request).Actual.Should().Be(11);
-            news.DoDecoratorDispatch(request).Actual.Should().Be(11);
-            news.DoExactHandler(request).Actual.Should().Be(11);
+            news.DoDispatch(request).Should().Be(MyReplyeEnum.Great);
+            news.DoSpecialDispatch(request).Should().Be(MyReplyeEnum.Great);
+            news.DoDecoratorDispatch(request).Should().Be(MyReplyeEnum.Great);
+            news.DoExactHandler(request).Should().Be(MyReplyeEnum.Great);
         }
 
         [Test]
@@ -301,9 +301,9 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
             {
                 Value = 20
             };
-            MyReplyModel requestResult = null;
-            Assert.DoesNotThrowAsync(async () => requestResult = await dispatcher.ExecuteAsync<MyRequestModel, MyReplyModel>(request));
-            requestResult.Actual.Should().Be(21);
+            MyReplyeEnum requestResult = MyReplyeEnum.Good;
+            Assert.DoesNotThrowAsync(async () => requestResult = await dispatcher.ExecuteAsync<MyRequestModel, MyReplyeEnum>(request));
+            requestResult.Should().Be(MyReplyeEnum.Great);
 
             var command = new MyCommandModel
             {

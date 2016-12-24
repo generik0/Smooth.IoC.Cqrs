@@ -10,7 +10,7 @@ namespace Smooth.IoC.Cqrs
     {
         IRequestHandler<TRequest, TReply> ResolveRequest<TRequest, TReply>()
             where TRequest : IRequest
-            where TReply : class ;
+            where TReply : IComparable;
 
         ICommandHandler<TCommand> Resolve<TCommand>()
             where TCommand : ICommand;

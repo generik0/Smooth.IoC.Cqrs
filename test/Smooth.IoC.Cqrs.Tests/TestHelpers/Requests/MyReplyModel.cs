@@ -1,7 +1,10 @@
 ﻿namespace Smooth.IoC.Cqrs.Tests.TestHelpers.Requests
 {
-    public class MyReplyModel   
+    public enum MyReplyeEnum   
     {
-        public int Actual { get; set; }
+        Good,
+        Great,
+        Error,
+        Fatal
     }
 }

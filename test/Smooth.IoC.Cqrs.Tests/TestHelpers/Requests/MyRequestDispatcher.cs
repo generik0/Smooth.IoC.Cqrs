@@ -4,7 +4,7 @@ using Smooth.IoC.Cqrs.Requests;
 namespace Smooth.IoC.Cqrs.Tests.TestHelpers.Requests
 {
     //Special Dispatcher
-    public class MyRequestDispatcher:IRequestDispatcher<MyRequestModel, MyReplyModel>
+    public class MyRequestDispatcher:IRequestDispatcher<MyRequestModel, MyReplyeEnum>
     {
         private readonly IRequestDispatcher _dispatcher;
 
@@ -13,12 +13,12 @@ namespace Smooth.IoC.Cqrs.Tests.TestHelpers.Requests
             _dispatcher = dispatcher;
         }
 
-        public Task<MyReplyModel> ExecuteAsync(MyRequestModel request)
+        public Task<MyReplyeEnum> ExecuteAsync(MyRequestModel request)
         {
-            return _dispatcher.ExecuteAsync<MyRequestModel, MyReplyModel>(request);
+            return _dispatcher.ExecuteAsync<MyRequestModel, MyReplyeEnum>(request);
         }
 
-        public MyReplyModel Execute(MyRequestModel request)
+        public MyReplyeEnum Execute(MyRequestModel request)
         {
             return ExecuteAsync(request).Result;
         }

@@ -5,7 +5,7 @@ namespace Smooth.IoC.Cqrs.Requests
 {
     public interface IRequestHandler<in TRequest, TReply> : IDisposable 
         where TRequest : IRequest
-        where TReply : class
+        where TReply : IComparable
     {
         /// <summary>
         /// Execute a request asynchronously.

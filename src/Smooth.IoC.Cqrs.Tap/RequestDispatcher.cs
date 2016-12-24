@@ -15,7 +15,7 @@ namespace Smooth.IoC.Cqrs.Tap
 
         public Task<TReply> ExecuteAsync<TRequest, TReply>(TRequest request)
             where TRequest : IRequest
-            where TReply : class 
+            where TReply : IComparable 
         {
             if (request == null)
             {
@@ -31,7 +31,7 @@ namespace Smooth.IoC.Cqrs.Tap
             }
         }
 
-        public TReply Execute<TRequest, TReply>(TRequest request) where TRequest : IRequest where TReply : class
+        public TReply Execute<TRequest, TReply>(TRequest request) where TRequest : IRequest where TReply : IComparable
         {
             return ExecuteAsync<TRequest, TReply>(request).Result;
         }

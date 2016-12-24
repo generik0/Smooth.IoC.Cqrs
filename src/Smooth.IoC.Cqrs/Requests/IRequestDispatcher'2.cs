@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace Smooth.IoC.Cqrs.Requests
 {
     public interface IRequestDispatcher<in TRequest, TReply>
         where TRequest : Request
-        where TReply : class
+        where TReply : IComparable
     {
         Task<TReply> ExecuteAsync(TRequest request);
 

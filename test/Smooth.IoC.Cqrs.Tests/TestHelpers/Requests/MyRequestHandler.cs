@@ -3,21 +3,18 @@ using Smooth.IoC.Cqrs.Requests;
 
 namespace Smooth.IoC.Cqrs.Tests.TestHelpers.Requests
 {
-    public class MyRequestHandler : Handler, IRequestHandler<MyRequestModel,MyReplyModel>
+    public class MyRequestHandler : Handler, IRequestHandler<MyRequestModel,MyReplyeEnum>
     {
         public MyRequestHandler(IHandlerFactory handlerFactory) : base(handlerFactory)
         {
         }
 
-        public Task<MyReplyModel> ExecuteAsync(MyRequestModel request)
+        public Task<MyReplyeEnum> ExecuteAsync(MyRequestModel request)
         {            
-            return Task.FromResult(new MyReplyModel
-            {
-                Actual = request.Value +1
-            });
+            return Task.FromResult(MyReplyeEnum.Great);
         }
 
-        public MyReplyModel Execute(MyRequestModel request)
+        public MyReplyeEnum Execute(MyRequestModel request)
         {
             return ExecuteAsync(request).Result;
         }

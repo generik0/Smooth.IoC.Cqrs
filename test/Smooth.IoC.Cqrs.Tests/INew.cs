@@ -4,9 +4,9 @@ namespace Smooth.IoC.Cqrs.Tests
 {
     public interface INew
     {
-        MyReplyModel DoDecoratorDispatch(MyRequestModel request);
-        MyReplyModel DoDispatch(MyRequestModel request);
-        MyReplyModel DoExactHandler(MyRequestModel request);
-        MyReplyModel DoSpecialDispatch(MyRequestModel request);
+        MyReplyeEnum DoDecoratorDispatch(MyRequestModel request);
+        MyReplyeEnum DoDispatch(MyRequestModel request);
+        MyReplyeEnum DoExactHandler(MyRequestModel request);
+        MyReplyeEnum DoSpecialDispatch(MyRequestModel request);
     }
 }

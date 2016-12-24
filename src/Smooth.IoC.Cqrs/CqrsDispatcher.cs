@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Smooth.IoC.Cqrs.Commanding;
 using Smooth.IoC.Cqrs.Query;
@@ -29,11 +30,11 @@ namespace Smooth.IoC.Cqrs
             _commandDispatcher.Execute(command); 
         }
 
-        public Task<TReply> ExecuteAsync<TRequest, TReply>(TRequest request) where TRequest : IRequest where TReply : class
+        public Task<TReply> ExecuteAsync<TRequest, TReply>(TRequest request) where TRequest : IRequest where TReply : IComparable
         {
             return _requestDispatcher.ExecuteAsync<TRequest, TReply>(request);
         }
-        public TReply Execute<TRequest, TReply>(TRequest request) where TRequest : IRequest where TReply : class
+        public TReply Execute<TRequest, TReply>(TRequest request) where TRequest : IRequest where TReply : IComparable
         {
             return _requestDispatcher.Execute<TRequest, TReply>(request);
         }
