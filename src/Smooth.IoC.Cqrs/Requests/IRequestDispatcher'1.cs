@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace Smooth.IoC.Cqrs.Requests
 {
@@ -6,6 +7,10 @@ namespace Smooth.IoC.Cqrs.Requests
     {
         Task<TReply> ExecuteAsync<TRequest, TReply>(TRequest request) 
             where TRequest : IRequest
-            where TReply : class ;
+            where TReply : IComparable ;
+
+        TReply Execute<TRequest, TReply>(TRequest request)
+            where TRequest : IRequest
+            where TReply : IComparable;
     }
 }

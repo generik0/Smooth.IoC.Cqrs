@@ -12,20 +12,40 @@ namespace Smooth.IoC.Cqrs.Query
         /// Execute a query asynchronously.
         /// </summary>
         /// <returns>Task which will be completed once the query has been executed.</returns>
-        Task<IReadOnlyCollection<TResult>> QueryAsync();
+        Task<IEnumerable<TResult>> QueryAsync();
 
         /// <summary>
         /// Execute a query asynchronously.
         /// </summary>
-        /// <param name="query">Command to execute.</param>
+        /// <param name="query">Query to execute.</param>
         /// <returns>Task which will be completed once the query has been executed.</returns>
-        Task<IReadOnlyCollection<TResult>> QueryAsync(TQuery query);
+        Task<IEnumerable<TResult>> QueryAsync(TQuery query);
 
         /// <summary>
         /// Execute a query asynchronously.
         /// </summary>
-        /// <param name="query">Command to execute.</param>
+        /// <param name="query">Query to execute.</param>
         /// <returns>Task which will be completed once the query has been executed.</returns>
         Task<TResult> QuerySingleOrDefaultAsync(TQuery query);
+
+        /// <summary>
+        /// Execute a query synchronously.
+        /// </summary>
+        /// <returns>Task which will be completed once the query has been executed.</returns>
+        IEnumerable<TResult> Query();
+
+        /// <summary>
+        /// Execute a query synchronously.
+        /// </summary>
+        /// <param name="query">Query to execute.</param>
+        /// <returns>Task which will be completed once the query has been executed.</returns>
+        IEnumerable<TResult> Query(TQuery query);
+
+        /// <summary>
+        /// Execute a query synchronously.
+        /// </summary>
+        /// <param name="query">Query to execute.</param>
+        /// <returns>Task which will be completed once the query has been executed.</returns>
+        TResult QuerySingleOrDefault(TQuery query);
     }
 }

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Smooth.IoC.Cqrs.Exceptions;
+using Smooth.IoC.Cqrs.Requests;
 
-namespace Smooth.IoC.Cqrs.Requests
+namespace Smooth.IoC.Cqrs.Tap
 {
     public class RequestDispatcher : IRequestDispatcher
     {
         private readonly IHandlerFactory _factory;
-
         public RequestDispatcher(IHandlerFactory factory)
         {
             _factory = factory;
@@ -15,7 +15,7 @@ namespace Smooth.IoC.Cqrs.Requests
 
         public Task<TReply> ExecuteAsync<TRequest, TReply>(TRequest request)
             where TRequest : IRequest
-            where TReply : class 
+            where TReply : IComparable 
         {
             if (request == null)
             {
@@ -29,6 +29,11 @@ namespace Smooth.IoC.Cqrs.Requests
                 }
                 return handler.ExecuteAsync(request);
             }
+        }
+
+        public TReply Execute<TRequest, TReply>(TRequest request) where TRequest : IRequest where TReply : IComparable
+        {
+            return ExecuteAsync<TRequest, TReply>(request).Result;
         }
     }
 }

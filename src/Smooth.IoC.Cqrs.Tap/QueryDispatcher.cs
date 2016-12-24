@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Smooth.IoC.Cqrs.Exceptions;
-using Smooth.IoC.Cqrs.Requests;
+using Smooth.IoC.Cqrs.Query;
 
-namespace Smooth.IoC.Cqrs.Query
+namespace Smooth.IoC.Cqrs.Tap
 {
     public class QueryDispatcher : IQueryDispatcher
     {
@@ -15,7 +15,7 @@ namespace Smooth.IoC.Cqrs.Query
             _factory = factory;
         }
 
-        public Task<IReadOnlyCollection<TResult>> QueryAsync<TQuery, TResult>() where TQuery : IQuery where TResult : class
+        public Task<IEnumerable<TResult>> QueryAsync<TQuery, TResult>() where TQuery : IQuery where TResult : class
         {
             using (var handler = _factory.ResolveQuery<TQuery, TResult>())
             {
@@ -27,7 +27,7 @@ namespace Smooth.IoC.Cqrs.Query
             }
         }
 
-        public Task<IReadOnlyCollection<TResult>> QueryAsync<TQuery, TResult>(TQuery query) where TQuery : IQuery where TResult : class
+        public Task<IEnumerable<TResult>> QueryAsync<TQuery, TResult>(TQuery query) where TQuery : IQuery where TResult : class
         {
             if (query == null)
             {
@@ -57,6 +57,21 @@ namespace Smooth.IoC.Cqrs.Query
                 }
                 return handler.QuerySingleOrDefaultAsync(query);
             }
+        }
+
+        public IEnumerable<TResult> Query<TQuery, TResult>() where TQuery : IQuery where TResult : class
+        {
+            return QueryAsync<TQuery, TResult>().Result;
+        }
+
+        public IEnumerable<TResult> Query<TQuery, TResult>(TQuery query) where TQuery : IQuery where TResult : class
+        {
+            return QueryAsync<TQuery, TResult>(query).Result;
+        }
+
+        public TResult QuerySingleOrDefault<TQuery, TResult>(TQuery query) where TQuery : IQuery where TResult : class
+        {
+            return QuerySingleOrDefaultAsync<TQuery, TResult>(query).Result;
         }
     }
 }

@@ -7,7 +7,7 @@
 
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>cd541434-dff8-40fe-a364-09acd95f3831</ProjectGuid>
+    <ProjectGuid>db4904a8-693e-4906-9b4f-602a14626022</ProjectGuid>
     <RootNamespace>Smooth.IoC.Cqrs</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>

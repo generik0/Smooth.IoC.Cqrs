@@ -3,8 +3,9 @@
 namespace Smooth.IoC.Cqrs.Commanding
 {
     public interface ICommandDispatcher<in TCommand> 
-        where TCommand : ICommand
+        where TCommand : Command
     {
         Task ExecuteAsync(TCommand command) ;
+        void Execute(TCommand command);
     }
 }

@@ -1,13 +1,65 @@
 ﻿{
-  "version": "1.0.0-*",
-
-  "dependencies": {
-    "NETStandard.Library": "1.6.0"
+  "version": "0.1.0-*",
+  "title": "Smooth.IoC.Cqrs.Tasks",
+  "authors": [ "Generik0" ],
+  "packOptions": {
+    "owners": [ "Rik Svendsen Rose" ],
+    "licenseUrl": "http://www.opensource.org/licenses/MIT",
+    "iconUrl": "https://raw.githubusercontent.com/Generik0/Smooth.IoC.Cqrs/master/logo.jpg",
+    "requireLicenseAcceptance": false,
+    "summary": "The smoothest IoC CQRS models"
+  },
+  "configurations": {
+    "Debug": {
+      "buildOptions": {
+        "define": [ "DEBUG", "TRACE" ]
+      }
+    },
+    "Release": {
+      "buildOptions": {
+        "define": [ "RELEASE", "TRACE" ],
+        "optimize": true
+      }
+    }
   },
 
   "frameworks": {
+    "net452": {
+      "frameworkAssemblies": {
+      },
+      "dependencies": {
+      }
+    },
+    "net461": {
+      "buildOptions": {
+        "define": [ "NET_46_OR_GREATER" ]
+      },
+      "frameworkAssemblies": {
+        },
+      "dependencies": {
+
+      }
+    },
     "netstandard1.6": {
-      "imports": "dnxcore50"
+      "imports": "dnxcore50",
+      "buildOptions": {
+        "define": [ "COREFX" ]
+      },
+      "dependencies": {
+
+      }
     }
+  },
+  "scripts": {
+    "postcompile": [
+    ] 
+  },
+  "description": "The smoothest IoC CQRS models. VS2015 or an equivalent build environment is recommended.",
+  "buildOptions": {
+    "xmlDoc": true,
+    "nowarn": [ "CS1591" ]
+  },
+  "dependencies": {
+    "NETStandard.Library": "1.6.0"
   }
 }

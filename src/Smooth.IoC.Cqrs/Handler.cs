@@ -1,18 +1,18 @@
 using System;
 
-namespace Smooth.IoC.Cqrs.Commanding
+namespace Smooth.IoC.Cqrs
 {
-    public abstract class HandlerBase :  IDisposable
+    public abstract class Handler :  IHandler
     {
         private readonly IHandlerFactory _handlerFactory;
         protected bool Disposed;
 
-        protected HandlerBase(IHandlerFactory handlerFactory)
+        protected Handler(IHandlerFactory handlerFactory)
         {
             _handlerFactory = handlerFactory;
         }
 
-        ~HandlerBase()
+        ~Handler()
         {
             Dispose(false);
         }
@@ -28,6 +28,11 @@ namespace Smooth.IoC.Cqrs.Commanding
             if (Disposed || !disposing) return;
             Disposed = true;
             _handlerFactory.Release(this);
+        }
+
+        public bool IsHandel<THandle>() where THandle : class
+        {
+            return typeof(THandle) == GetType();
         }
     }
 }

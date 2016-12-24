@@ -4,13 +4,15 @@ using System.Threading.Tasks;
 namespace Smooth.IoC.Cqrs.Query
 {
     public interface IQueryDispatcher<in TQuery, TResult>
-        where TQuery : IQuery
+        where TQuery : Query
         where TResult : class
     {
-        Task<IReadOnlyCollection<TResult>> QueryAsync();
-
-        Task<IReadOnlyCollection<TResult>> QueryAsync(TQuery query);
-
+        Task<IEnumerable<TResult>> QueryAsync();
+        Task<IEnumerable<TResult>> QueryAsync(TQuery query);
         Task<TResult> QuerySingleOrDefaultAsync(TQuery query);
+        IEnumerable<TResult> Query();
+        IEnumerable<TResult> Query(TQuery query);
+        TResult QuerySingleOrDefault(TQuery query);
+        
     }
 }
