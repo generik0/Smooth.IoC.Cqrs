@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Smooth.IoC.Cqrs.Requests;
-using Smooth.IoC.Cqrs.Tests.TestHelpers.Requests;
 
-namespace Smooth.IoC.Cqrs.Tests
+namespace Smooth.IoC.Cqrs.Tests.TestHelpers.Requests
 {
     public class MyRequestHandler : Handler, IRequestHandler<MyRequestModel,MyReplyModel>
     {

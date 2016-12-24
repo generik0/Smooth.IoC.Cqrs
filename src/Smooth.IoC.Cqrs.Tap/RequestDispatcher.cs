@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Smooth.IoC.Cqrs.Exceptions;
 using Smooth.IoC.Cqrs.Requests;
 
-namespace Smooth.IoC.Cqrs.Tasks
+namespace Smooth.IoC.Cqrs.Tap
 {
     public class RequestDispatcher : IRequestDispatcher
     {

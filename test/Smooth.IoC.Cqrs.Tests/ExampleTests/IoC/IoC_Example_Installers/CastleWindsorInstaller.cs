@@ -5,7 +5,7 @@ using Castle.Windsor;
 using Smooth.IoC.Cqrs.Commanding;
 using Smooth.IoC.Cqrs.Query;
 using Smooth.IoC.Cqrs.Requests;
-using Smooth.IoC.Cqrs.Tasks;
+using Smooth.IoC.Cqrs.Tap;
 using Smooth.IoC.Cqrs.Tests.TestHelpers;
 
 namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC.IoC_Example_Installers

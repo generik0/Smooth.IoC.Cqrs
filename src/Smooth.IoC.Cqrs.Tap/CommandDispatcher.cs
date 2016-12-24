@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Smooth.IoC.Cqrs.Commanding;
 using Smooth.IoC.Cqrs.Exceptions;
 
-namespace Smooth.IoC.Cqrs.Tasks
+namespace Smooth.IoC.Cqrs.Tap
 {
     public class CommandDispatcher : ICommandDispatcher
     {
