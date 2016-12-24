@@ -16,5 +16,18 @@ namespace Smooth.IoC.Cqrs.Query
         Task<TResult> QuerySingleOrDefaultAsync<TQuery, TResult>(TQuery query)
             where TQuery : IQuery
             where TResult : class;
+
+        IEnumerable<TResult> Query<TQuery, TResult>()
+            where TQuery : IQuery
+            where TResult : class;
+
+        IEnumerable<TResult> Query<TQuery, TResult>(TQuery query)
+            where TQuery : IQuery
+            where TResult : class;
+
+        TResult QuerySingleOrDefault<TQuery, TResult>(TQuery query)
+            where TQuery : IQuery
+            where TResult : class;
+
     }
 }

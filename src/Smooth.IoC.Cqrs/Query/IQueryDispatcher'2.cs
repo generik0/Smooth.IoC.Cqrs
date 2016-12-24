@@ -10,5 +10,9 @@ namespace Smooth.IoC.Cqrs.Query
         Task<IEnumerable<TResult>> QueryAsync();
         Task<IEnumerable<TResult>> QueryAsync(TQuery query);
         Task<TResult> QuerySingleOrDefaultAsync(TQuery query);
+        IEnumerable<TResult> Query();
+        IEnumerable<TResult> Query(TQuery query);
+        TResult QuerySingleOrDefault(TQuery query);
+        
     }
 }

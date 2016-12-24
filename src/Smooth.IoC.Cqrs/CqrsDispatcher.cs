@@ -43,5 +43,20 @@ namespace Smooth.IoC.Cqrs
         {
             return  _queryDispatcher.QuerySingleOrDefaultAsync<TQuery, TResult>(query);
         }
+
+        public IEnumerable<TResult> Query<TQuery, TResult>() where TQuery : IQuery where TResult : class
+        {
+            return _queryDispatcher.Query<TQuery, TResult>();
+        }
+
+        public IEnumerable<TResult> Query<TQuery, TResult>(TQuery query) where TQuery : IQuery where TResult : class
+        {
+            return _queryDispatcher.Query<TQuery, TResult>(query);
+        }
+
+        public TResult QuerySingleOrDefault<TQuery, TResult>(TQuery query) where TQuery : IQuery where TResult : class
+        {
+            return _queryDispatcher.QuerySingleOrDefault<TQuery, TResult>(query);
+        }
     }
 }

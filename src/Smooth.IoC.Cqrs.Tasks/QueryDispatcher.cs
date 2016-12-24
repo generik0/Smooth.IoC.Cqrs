@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Smooth.IoC.Cqrs.Exceptions;
 using Smooth.IoC.Cqrs.Query;
@@ -57,6 +58,21 @@ namespace Smooth.IoC.Cqrs.Tasks
                 }
                 return handler.QuerySingleOrDefaultAsync(query);
             }
+        }
+
+        public IEnumerable<TResult> Query<TQuery, TResult>() where TQuery : IQuery where TResult : class
+        {
+            return QueryAsync<TQuery, TResult>().Result;
+        }
+
+        public IEnumerable<TResult> Query<TQuery, TResult>(TQuery query) where TQuery : IQuery where TResult : class
+        {
+            return QueryAsync<TQuery, TResult>(query).Result;
+        }
+
+        public TResult QuerySingleOrDefault<TQuery, TResult>(TQuery query) where TQuery : IQuery where TResult : class
+        {
+            return QuerySingleOrDefaultAsync<TQuery, TResult>(query).Result;
         }
     }
 }

@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Smooth.IoC.Cqrs.Query;
-using Smooth.IoC.Cqrs.Requests;
-using Smooth.IoC.Cqrs.Tests.TestHelpers.Queries;
 
-namespace Smooth.IoC.Cqrs.Tests.TestHelpers.Requests
+namespace Smooth.IoC.Cqrs.Tests.TestHelpers.Queries
 {
     //Special Dispatcher
     public class MyQueryDispatcher : IQueryDispatcher<MyQueryModel, MyResultModel>
@@ -29,6 +27,21 @@ namespace Smooth.IoC.Cqrs.Tests.TestHelpers.Requests
         public Task<MyResultModel> QuerySingleOrDefaultAsync(MyQueryModel query)
         {
             return _dispatcher.QuerySingleOrDefaultAsync<MyQueryModel, MyResultModel>(query);
+        }
+
+        public IEnumerable<MyResultModel> Query()
+        {
+            return _dispatcher.QueryAsync<MyQueryModel, MyResultModel>().Result;
+        }
+
+        public IEnumerable<MyResultModel> Query(MyQueryModel query)
+        {
+            return _dispatcher.QueryAsync<MyQueryModel, MyResultModel>(query).Result;
+        }
+
+        public MyResultModel QuerySingleOrDefault(MyQueryModel query)
+        {
+            return _dispatcher.QuerySingleOrDefaultAsync<MyQueryModel, MyResultModel>(query).Result;
         }
     }
 }
