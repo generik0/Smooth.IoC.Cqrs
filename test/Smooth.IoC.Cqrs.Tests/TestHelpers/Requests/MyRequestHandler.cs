@@ -17,5 +17,10 @@ namespace Smooth.IoC.Cqrs.Tests
                 Actual = request.Value +1
             });
         }
+
+        public MyReplyModel Execute(MyRequestModel request)
+        {
+            return ExecuteAsync(request).Result;
+        }
     }
 }

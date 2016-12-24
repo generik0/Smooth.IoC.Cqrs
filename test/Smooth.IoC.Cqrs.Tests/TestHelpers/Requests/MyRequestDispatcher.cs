@@ -17,5 +17,10 @@ namespace Smooth.IoC.Cqrs.Tests.TestHelpers.Requests
         {
             return _dispatcher.ExecuteAsync<MyRequestModel, MyReplyModel>(request);
         }
+
+        public MyReplyModel Execute(MyRequestModel request)
+        {
+            return ExecuteAsync(request).Result;
+        }
     }
 }

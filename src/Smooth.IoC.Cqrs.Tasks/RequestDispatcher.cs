@@ -30,5 +30,10 @@ namespace Smooth.IoC.Cqrs.Tasks
                 return handler.ExecuteAsync(request);
             }
         }
+
+        public TReply Execute<TRequest, TReply>(TRequest request) where TRequest : IRequest where TReply : class
+        {
+            return ExecuteAsync<TRequest, TReply>(request).Result;
+        }
     }
 }

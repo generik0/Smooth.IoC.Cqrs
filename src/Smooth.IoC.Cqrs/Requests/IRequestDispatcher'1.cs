@@ -7,5 +7,9 @@ namespace Smooth.IoC.Cqrs.Requests
         Task<TReply> ExecuteAsync<TRequest, TReply>(TRequest request) 
             where TRequest : IRequest
             where TReply : class ;
+
+        TReply Execute<TRequest, TReply>(TRequest request)
+            where TRequest : IRequest
+            where TReply : class;
     }
 }
