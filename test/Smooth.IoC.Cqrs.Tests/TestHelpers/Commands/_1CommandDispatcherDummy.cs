@@ -17,5 +17,10 @@ namespace Smooth.IoC.Cqrs.Tests.TestHelpers.Commands
             //Can do anything. But here just call the general dispatcher
             return _dispatcher.ExecuteAsync(command);
         }
+
+        public void Execute(_CommandModelDummy command)
+        {
+            ExecuteAsync(command).RunSynchronously();
+        }
     }
 }

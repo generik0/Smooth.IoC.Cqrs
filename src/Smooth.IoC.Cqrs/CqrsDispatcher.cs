@@ -24,6 +24,11 @@ namespace Smooth.IoC.Cqrs
             return _commandDispatcher.ExecuteAsync(command);
         }
 
+        public void Execute<TCommand>(TCommand command) where TCommand : ICommand
+        {
+            _commandDispatcher.Execute(command); 
+        }
+
         public Task<TReply> ExecuteAsync<TRequest, TReply>(TRequest request) where TRequest : IRequest where TReply : class
         {
             return _requestDispatcher.ExecuteAsync<TRequest, TReply>(request);
@@ -62,5 +67,6 @@ namespace Smooth.IoC.Cqrs
         {
             return _queryDispatcher.QuerySingleOrDefault<TQuery, TResult>(query);
         }
+        
     }
 }

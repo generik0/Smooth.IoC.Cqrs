@@ -18,5 +18,10 @@ namespace Smooth.IoC.Cqrs.Tests.TestHelpers.Commands
             //Can do anything. But here jsut call the general dispatcher
             return _dispatcher.ExecuteAsync(command);
         }
+
+        public void Execute(MyCommandModel command)
+        {
+            ExecuteAsync(command).RunSynchronously();
+        }
     }
 }

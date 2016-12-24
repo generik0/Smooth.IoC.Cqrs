@@ -13,5 +13,10 @@ namespace Smooth.IoC.Cqrs.Tests.TestHelpers.Commands
         {
             return Task.FromResult(command.Value += ++command.Value);
         }
+
+        public void Execute(_CommandModelDummy command)
+        {
+            ExecuteAsync(command).RunSynchronously();
+        }
     }
 }

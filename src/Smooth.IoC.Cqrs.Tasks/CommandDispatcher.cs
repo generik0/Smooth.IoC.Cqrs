@@ -31,5 +31,10 @@ namespace Smooth.IoC.Cqrs.Tasks
                 return handler.ExecuteAsync(command);
             }
         }
+
+        public void Execute<TCommand>(TCommand command) where TCommand : ICommand
+        {
+            ExecuteAsync(command).RunSynchronously();
+        }
     }
 }

@@ -11,5 +11,12 @@ namespace Smooth.IoC.Cqrs.Commanding
         /// <param name="command">Command to execute.</param>
         /// <returns>Task which will be completed once the command has been executed.</returns>
         Task ExecuteAsync(TCommand command);
+        
+        /// <summary>
+        /// Execute a command synchronously.
+        /// </summary>
+        /// <param name="command">Command to execute.</param>
+        /// <returns>Will be completed once the command has been executed.</returns>
+        void Execute(TCommand command);
     }
 }

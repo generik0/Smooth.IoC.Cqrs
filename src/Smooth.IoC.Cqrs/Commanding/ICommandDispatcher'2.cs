@@ -6,5 +6,6 @@ namespace Smooth.IoC.Cqrs.Commanding
         where TCommand : Command
     {
         Task ExecuteAsync(TCommand command) ;
+        void Execute(TCommand command);
     }
 }
