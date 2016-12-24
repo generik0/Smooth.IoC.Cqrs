@@ -280,25 +280,37 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
         }
 
         [Test]
-        public void Resolve_IDispatcher_AndExecuteAllMethodsCorrectly()
+        public void Resolve_ICqrsDispatcher_AndExecuteAllMethodsCorrectly()
         {
             var query = new MyQueryModel
             {
                 Value = 10
             };
             var dispatcher = _container.Resolve<ICqrsDispatcher>();
-            IEnumerable<MyResultModel> result1 = null;
-            Assert.DoesNotThrowAsync(async () => result1 = await dispatcher.QueryAsync<MyQueryModel, MyResultModel>());
-            IEnumerable<MyResultModel> result2 = null;
-            Assert.DoesNotThrowAsync(async () => result2 = await dispatcher.QueryAsync<MyQueryModel, MyResultModel>(query));
-            MyResultModel result3 = null;
-            Assert.DoesNotThrowAsync(async () => result3 = await dispatcher.QuerySingleOrDefaultAsync<MyQueryModel, MyResultModel>(query));
-            
-            result1.First().Actual.Should().Be(1);
-            result2.First().Actual.Should().Be(11);
-            result3.Actual.Should().Be(11);
-            
+            IEnumerable<MyResultModel> queryResult1 = null;
+            Assert.DoesNotThrowAsync(async () => queryResult1 = await dispatcher.QueryAsync<MyQueryModel, MyResultModel>());
+            IEnumerable<MyResultModel> queryResult2 = null;
+            Assert.DoesNotThrowAsync(async () => queryResult2 = await dispatcher.QueryAsync<MyQueryModel, MyResultModel>(query));
+            MyResultModel queryResult3 = null;
+            Assert.DoesNotThrowAsync(async () => queryResult3 = await dispatcher.QuerySingleOrDefaultAsync<MyQueryModel, MyResultModel>(query));
+            queryResult1.First().Actual.Should().Be(1);
+            queryResult2.First().Actual.Should().Be(11);
+            queryResult3.Actual.Should().Be(11);
 
+            var request = new MyRequestModel
+            {
+                Value = 20
+            };
+            MyReplyModel requestResult = null;
+            Assert.DoesNotThrowAsync(async () => requestResult = await dispatcher.ExecuteAsync<MyRequestModel, MyReplyModel>(request));
+            requestResult.Actual.Should().Be(21);
+
+            var command = new MyCommandModel
+            {
+                Value = 30
+            };
+            Assert.DoesNotThrowAsync(async () => await dispatcher.ExecuteAsync(command));
+            
         }
     }
 }
