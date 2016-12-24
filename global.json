@@ -1,3 +1,3 @@
 ﻿{
-  "projects": [ "Smooth.IoC.Cqrs", "Smooth.IoC.Cqrs.Tests" ]
+  "projects": [ "Smooth.IoC.Cqrs.Tasks", "Smooth.IoC.Cqrs.Tests" ]
 }
