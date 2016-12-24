@@ -7,10 +7,10 @@
     <authors>Rik Svendsen Rose</authors>
     <owners>Generik0</owners>
     <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
-    <projectUrl>https://github.com/generik0/Smooth.IoC.Dapper.Repository.UnitOfWork</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/Generik0/Smooth.IoC.Dapper.Repository.UnitOfWork/master/logo.jpg</iconUrl>
+    <projectUrl>https://github.com/generik0/Smooth.IoC.Cqrs</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/Generik0/Smooth.IoC.Cqrs/master/logo.jpg</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <summary>Smooth IoC UnitOfWork patterns.</summary>
+    <summary>Smooth IoC Cqrs principle / patterns.</summary>
     <description>
       The package provides a solution for the Cqrs principle / patterns together with inversition of control.
       On the project site there are examples of Castle.Windsor integration. The IoC framework is not an issue... It is ment to integrate nice and smooth like using a factory pattern...
