@@ -26,5 +26,20 @@ namespace Smooth.IoC.Cqrs.Tests.TestHelpers.Queries
         {
             return Task.FromResult(new MyResultModel {Actual = query.Value + 1});
         }
+
+        public IEnumerable<MyResultModel> Query()
+        {
+            return QueryAsync().Result;
+        }
+
+        public IEnumerable<MyResultModel> Query(MyQueryModel query)
+        {
+            return QueryAsync(query).Result;
+        }
+
+        public MyResultModel QuerySingleOrDefault(MyQueryModel query)
+        {
+            return QuerySingleOrDefaultAsync(query).Result;
+        }
     }
 }
