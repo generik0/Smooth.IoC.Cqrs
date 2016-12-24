@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Smooth.IoC.Cqrs.Tasks.Commanding
+namespace Smooth.IoC.Cqrs.Commanding
 {
     public interface ICommandHandler<in TCommand> : IHandler
         where TCommand : ICommand

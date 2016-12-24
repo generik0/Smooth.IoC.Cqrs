@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Smooth.IoC.Cqrs.Tasks.Exceptions;
+using Smooth.IoC.Cqrs.Exceptions;
+using Smooth.IoC.Cqrs.Query;
 
-namespace Smooth.IoC.Cqrs.Tasks.Query
+namespace Smooth.IoC.Cqrs.Tasks
 {
     public class QueryDispatcher : IQueryDispatcher
     {

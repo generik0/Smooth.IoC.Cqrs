@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Smooth.IoC.Cqrs.Tasks.Requests
+namespace Smooth.IoC.Cqrs.Requests
 {
     public interface IRequestDispatcher
     {

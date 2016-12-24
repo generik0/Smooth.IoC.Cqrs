@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Smooth.IoC.Cqrs.Tasks.Requests
+namespace Smooth.IoC.Cqrs.Requests
 {
     public interface IRequestHandler<in TRequest, TReply> : IDisposable 
         where TRequest : IRequest

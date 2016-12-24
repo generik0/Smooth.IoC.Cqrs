@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Smooth.IoC.Cqrs.Tasks.Commanding;
-using Smooth.IoC.Cqrs.Tasks.Query;
-using Smooth.IoC.Cqrs.Tasks.Requests;
+using Smooth.IoC.Cqrs.Commanding;
+using Smooth.IoC.Cqrs.Query;
+using Smooth.IoC.Cqrs.Requests;
 
-namespace Smooth.IoC.Cqrs.Tasks
+namespace Smooth.IoC.Cqrs
 {
     public class CqrsDispatcher : ICqrsDispatcher
     {

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Smooth.IoC.Cqrs.Tasks.Exceptions;
+using Smooth.IoC.Cqrs.Exceptions;
+using Smooth.IoC.Cqrs.Requests;
 
-namespace Smooth.IoC.Cqrs.Tasks.Requests
+namespace Smooth.IoC.Cqrs.Tasks
 {
     public class RequestDispatcher : IRequestDispatcher
     {

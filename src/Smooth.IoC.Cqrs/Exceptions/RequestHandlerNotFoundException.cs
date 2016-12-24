@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Smooth.IoC.Cqrs.Tasks.Exceptions
+namespace Smooth.IoC.Cqrs.Exceptions
 {
     public class RequestHandlerNotFoundException : Exception
     {

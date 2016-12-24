@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Smooth.IoC.Cqrs.Tasks.Query
+namespace Smooth.IoC.Cqrs.Query
 {
     public interface IQueryDispatcher<in TQuery, TResult>
-        where TQuery : Cqrs.Query
+        where TQuery : Query
         where TResult : class
     {
         Task<IEnumerable<TResult>> QueryAsync();

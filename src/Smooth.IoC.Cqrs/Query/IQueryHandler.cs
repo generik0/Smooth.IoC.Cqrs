@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Smooth.IoC.Cqrs.Tasks.Query
+namespace Smooth.IoC.Cqrs.Query
 {
     public interface IQueryHandler<in TQuery, TResult> : IDisposable 
         where TQuery : IQuery

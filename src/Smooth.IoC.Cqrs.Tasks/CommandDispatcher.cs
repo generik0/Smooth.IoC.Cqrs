@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Smooth.IoC.Cqrs.Tasks.Exceptions;
+using Smooth.IoC.Cqrs.Commanding;
+using Smooth.IoC.Cqrs.Exceptions;
 
-namespace Smooth.IoC.Cqrs.Tasks.Commanding
+namespace Smooth.IoC.Cqrs.Tasks
 {
     public class CommandDispatcher : ICommandDispatcher
     {

@@ -1,4 +1,5 @@
 ﻿using System;
+using Smooth.IoC.Cqrs.Requests;
 
 namespace Smooth.IoC.Cqrs
 {
