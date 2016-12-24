@@ -19,7 +19,7 @@ using Smooth.IoC.Cqrs.Tests.TestHelpers.Requests;
 namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
 {
     [TestFixture]
-    public class CastleWindsorTests
+    public class CastleWindsorTasksTests
     {
         private static IWindsorContainer _container;
 

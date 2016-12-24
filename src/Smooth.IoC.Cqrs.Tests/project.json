@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.0.0-*",
   "title": "Smooth.IoC.Dapper.Cqrs.Tests",
   "authors": [ "Rik Svendsen Rose" ],
@@ -53,7 +53,7 @@
     "Ninject.Extensions.Interception": "3.2.0",
     "NUnit": "3.5.0",
     "SimpleInjector": "3.3.2",
-    "Smooth.IoC.Cqrs": "0.1.0-*",
+    "Smooth.IoC.Cqrs.Tasks": "0.1.0-*",
     "StructureMap": "4.4.2",
     "Unity": "4.0.1"
   }
