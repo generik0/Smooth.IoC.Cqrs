@@ -22,6 +22,7 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC.IoC_Example_Installers
             container.Register(Component.For<ICommandDispatcher>().ImplementedBy<CommandDispatcher>());
             container.Register(Component.For<IRequestDispatcher>().ImplementedBy<RequestDispatcher>());
             container.Register(Component.For<IQueryDispatcher>().ImplementedBy<QueryDispatcher>());
+            container.Register(Component.For<ICqrsDispatcher>().ImplementedBy<CqrsDispatcher>());
         }
     }
 }
