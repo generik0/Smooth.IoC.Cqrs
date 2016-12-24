@@ -1,8 +1,8 @@
-﻿    using System;
+﻿using System;
 using System.Threading.Tasks;
-using Smooth.IoC.Cqrs.Exceptions;
+using Smooth.IoC.Cqrs.Tasks.Exceptions;
 
-namespace Smooth.IoC.Cqrs.Commanding
+namespace Smooth.IoC.Cqrs.Tasks.Commanding
 {
     public class CommandDispatcher : ICommandDispatcher
     {
@@ -13,12 +13,12 @@ namespace Smooth.IoC.Cqrs.Commanding
             _factory = factory;
         }
 
-        public Task ExecuteAsync<TCommand>(TCommand request)
+        public Task ExecuteAsync<TCommand>(TCommand command)
             where TCommand : ICommand
         {
-            if (request == null)
+            if (command == null)
             {
-                throw new ArgumentNullException(nameof(request));
+                throw new ArgumentNullException(nameof(command));
             }
             using (var handler = _factory.Resolve<TCommand>())
             {
@@ -27,7 +27,7 @@ namespace Smooth.IoC.Cqrs.Commanding
                     throw new CommandHandlerNotFoundException(typeof(TCommand));
                 }
 
-                return handler.ExecuteAsync(request);
+                return handler.ExecuteAsync(command);
             }
         }
     }

@@ -1,6 +1,6 @@
 using System;
 
-namespace Smooth.IoC.Cqrs.Commanding
+namespace Smooth.IoC.Cqrs
 {
     public abstract class Command : ICommand
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Smooth.IoC.Cqrs.Query
+namespace Smooth.IoC.Cqrs
 {
     public interface IQuery 
     {

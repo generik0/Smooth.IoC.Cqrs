@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 
-namespace Smooth.IoC.Cqrs.Commanding
+namespace Smooth.IoC.Cqrs.Tasks.Commanding
 {
     public interface ICommandDispatcher
     {
-        Task ExecuteAsync<TCommand>(TCommand request) where TCommand : ICommand;
+        Task ExecuteAsync<TCommand>(TCommand command) where TCommand : ICommand;
     }
 }

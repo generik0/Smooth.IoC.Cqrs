@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Smooth.IoC.Cqrs.Requests
+namespace Smooth.IoC.Cqrs
 {
     public abstract class Request : IRequest
     {

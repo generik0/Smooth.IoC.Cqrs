@@ -7,7 +7,7 @@
     "licenseUrl": "http://www.opensource.org/licenses/MIT",
     "iconUrl": "https://raw.githubusercontent.com/Generik0/Smooth.IoC.Cqrs/master/logo.jpg",
     "requireLicenseAcceptance": false,
-    "summary": "The smoothest IoC CQRS factory using tasks"
+    "summary": "The smoothest IoC CQRS models"
   },
   "configurations": {
     "Debug": {
@@ -54,13 +54,12 @@
     "postcompile": [
     ] 
   },
-  "description": "The smoothest IoC CQRS factory using tasks. VS2015 or an equivalent build environment is recommended.",
+  "description": "The smoothest IoC CQRS models. VS2015 or an equivalent build environment is recommended.",
   "buildOptions": {
     "xmlDoc": true,
     "nowarn": [ "CS1591" ]
   },
   "dependencies": {
-    "NETStandard.Library": "1.6.0",
-    "Smooth.IoC.Cqrs": "0.1.0-*"
+    "NETStandard.Library": "1.6.0"
   }
 }

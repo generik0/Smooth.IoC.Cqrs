@@ -1,7 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
-namespace Smooth.IoC.Cqrs.Commanding
+namespace Smooth.IoC.Cqrs.Tasks.Commanding
 {
     public interface ICommandHandler<in TCommand> : IHandler
         where TCommand : ICommand

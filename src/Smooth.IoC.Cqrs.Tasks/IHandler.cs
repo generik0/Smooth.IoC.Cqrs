@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Smooth.IoC.Cqrs
+namespace Smooth.IoC.Cqrs.Tasks
 {
     public interface IHandler : IDisposable
     {

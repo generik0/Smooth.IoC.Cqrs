@@ -1,6 +1,6 @@
 using System;
 
-namespace Smooth.IoC.Cqrs.Requests
+namespace Smooth.IoC.Cqrs
 {
     /// <summary>
     /// A request is the first part of the request/reply pattern. 

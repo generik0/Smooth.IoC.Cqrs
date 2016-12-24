@@ -1,9 +1,9 @@
 ﻿using System;
-using Smooth.IoC.Cqrs.Commanding;
-using Smooth.IoC.Cqrs.Query;
-using Smooth.IoC.Cqrs.Requests;
+using Smooth.IoC.Cqrs.Tasks.Commanding;
+using Smooth.IoC.Cqrs.Tasks.Query;
+using Smooth.IoC.Cqrs.Tasks.Requests;
 
-namespace Smooth.IoC.Cqrs
+namespace Smooth.IoC.Cqrs.Tasks
 {
   
     public interface IHandlerFactory
