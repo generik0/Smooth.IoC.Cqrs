@@ -5,7 +5,10 @@ using Smooth.IoC.Cqrs.Query;
 
 namespace Smooth.IoC.Cqrs.Tests.TestHelpers.Queries
 {
-    public class MyQueryHandler : Handler, IQueryHandler<MyQueryModel, MyResultModel>
+    public class MyQueryHandler : Handler, 
+        IQueryHandler<MyQueryModel, MyResultModel>, 
+        IQueryHandler< MyResultModel>, 
+        IQuerySingleHandler<MyQueryModel, MyResultModel>
     {
         public MyQueryHandler(IHandlerFactory handlerFactory) : base(handlerFactory)
         {

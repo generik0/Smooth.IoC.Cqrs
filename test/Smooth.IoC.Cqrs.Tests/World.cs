@@ -13,22 +13,23 @@ namespace Smooth.IoC.Cqrs.Tests
         private readonly IQueryDispatcher<MyQueryModel, MyResultModel> _specialDispatcher;
         private readonly IEnumerable<IHandler> _handlers;
         private readonly IQueryHandler<MyQueryModel, MyResultModel> _handler;
+        private readonly IQuerySingleHandler<MyQueryModel, MyResultModel> _singleHandler;
 
         public World(IQueryDispatcher dispatcher, IQueryDispatcher<MyQueryModel, MyResultModel> specialDispatcher, IEnumerable<IHandler> handlers,
-            IQueryHandler<MyQueryModel, MyResultModel> handler)
+            IQueryHandler<MyQueryModel, MyResultModel> handler, IQuerySingleHandler<MyQueryModel, MyResultModel> singleHandler)
         {
             _dispatcher = dispatcher;
             _specialDispatcher = specialDispatcher;
             _handlers = handlers;
             _handler = handler;
+            _singleHandler = singleHandler;
         }
         public async Task<MyResultModel> DoDispatch(MyQueryModel query)
         {
-            var result1 = await _dispatcher.QueryAsync<MyQueryModel, MyResultModel>();
             var result2 = await _dispatcher.QueryAsync<MyQueryModel, MyResultModel>(query);
             return _dispatcher.QuerySingleOrDefaultAsync<MyQueryModel, MyResultModel>(new MyQueryModel
             {
-                Value = result1.FirstOrDefault().Actual + result2.FirstOrDefault().Actual
+                Value = result2.FirstOrDefault().Actual
             }).Result;
         }
         public async Task<MyResultModel> DoExactHandler(MyQueryModel query)
@@ -53,11 +54,10 @@ namespace Smooth.IoC.Cqrs.Tests
         }
         public async Task<MyResultModel> DoDecoratorDispatch(MyQueryModel query)
         {
-            var result1 = await _handler.QueryAsync();
             var result2 = await _handler.QueryAsync(query);
-            return _handler.QuerySingleOrDefaultAsync(new MyQueryModel
+            return _singleHandler.QuerySingleOrDefaultAsync(new MyQueryModel
             {
-                Value = result1.FirstOrDefault().Actual + result2.FirstOrDefault().Actual
+                Value = result2.FirstOrDefault().Actual
             }).Result;
         }
     }

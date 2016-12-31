@@ -191,8 +191,6 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
             };
             var handler = _container.Resolve<IQueryDispatcher>();
             IEnumerable<MyResultModel> results = null;
-            Assert.DoesNotThrowAsync(async () => results = await handler.QueryAsync<MyQueryModel, MyResultModel>());
-            results.First().Actual.Should().Be(1);
             Assert.DoesNotThrowAsync(async () => results = await handler.QueryAsync<MyQueryModel, MyResultModel>(query));
             results.First().Actual.Should().Be(2);
             MyResultModel result = null;
@@ -209,8 +207,6 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
             };
             var commandHandler = _container.Resolve<IQueryDispatcher<MyQueryModel, MyResultModel>>();
             IEnumerable<MyResultModel> results = null;
-            Assert.DoesNotThrowAsync(async () => results = await commandHandler.QueryAsync());
-            results.First().Actual.Should().Be(1);
             Assert.DoesNotThrowAsync(async () => results = await commandHandler.QueryAsync(query));
             results.First().Actual.Should().Be(3);
             MyResultModel result = null;
@@ -246,12 +242,11 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
             };
             var handle = _container.Resolve<IQueryHandler<MyQueryModel, MyResultModel>>();
             IEnumerable<MyResultModel> results = null;
-            Assert.DoesNotThrowAsync(async () => results = await handle.QueryAsync());
-            results.First().Actual.Should().Be(1);
             Assert.DoesNotThrowAsync(async () => results = await handle.QueryAsync(query));
             results.First().Actual.Should().Be(5);
+            var singleHandle = _container.Resolve<IQuerySingleHandler<MyQueryModel, MyResultModel>>();
             MyResultModel result = null;
-            Assert.DoesNotThrowAsync(async () => result = await handle.QuerySingleOrDefaultAsync(query));
+            Assert.DoesNotThrowAsync(async () => result = await singleHandle.QuerySingleOrDefaultAsync(query));
             result.Actual.Should().Be(5);
         }
 
@@ -269,14 +264,10 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
             Assert.DoesNotThrowAsync(async () => result2 = await news.DoSpecialDispatch(query));
             MyResultModel result3 = null;
             Assert.DoesNotThrowAsync(async () => result3 = await news.DoDecoratorDispatch(query));
-            MyResultModel result4 = null;
-            Assert.DoesNotThrowAsync(async () => result4 = await news.DoExactHandler(query));
-                
-            result1.Actual.Should().Be(13);
-            result2.Actual.Should().Be(13);
-            result3.Actual.Should().Be(13);
-            result4.Actual.Should().Be(13);
             
+            result1.Actual.Should().Be(12);
+            result2.Actual.Should().Be(13);
+            result3.Actual.Should().Be(12);
         }
 
         [Test]
@@ -287,13 +278,10 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
                 Value = 10
             };
             var dispatcher = _container.Resolve<ICqrsDispatcher>();
-            IEnumerable<MyResultModel> queryResult1 = null;
-            Assert.DoesNotThrowAsync(async () => queryResult1 = await dispatcher.QueryAsync<MyQueryModel, MyResultModel>());
             IEnumerable<MyResultModel> queryResult2 = null;
             Assert.DoesNotThrowAsync(async () => queryResult2 = await dispatcher.QueryAsync<MyQueryModel, MyResultModel>(query));
             MyResultModel queryResult3 = null;
             Assert.DoesNotThrowAsync(async () => queryResult3 = await dispatcher.QuerySingleOrDefaultAsync<MyQueryModel, MyResultModel>(query));
-            queryResult1.First().Actual.Should().Be(1);
             queryResult2.First().Actual.Should().Be(11);
             queryResult3.Actual.Should().Be(11);
 

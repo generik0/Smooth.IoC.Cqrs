@@ -22,6 +22,10 @@ namespace Smooth.IoC.Cqrs
         IQueryHandler<TResult> ResolveQuery<TResult>()
             where TResult : class;
 
+        IQuerySingleHandler<TQuery, TResult> ResolveSingleQuery<TQuery, TResult>()
+            where TQuery : IQuery
+            where TResult : class;
+
         void Release(IDisposable instance);
     }
 }

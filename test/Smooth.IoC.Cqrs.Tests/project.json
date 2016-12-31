@@ -53,7 +53,7 @@
     "Ninject.Extensions.Interception": "3.2.0",
     "NUnit": "3.5.0",
     "SimpleInjector": "3.3.2",
-    "Smooth.IoC.Cqrs.Tap": "0.1.0-*",
+    "Smooth.IoC.Cqrs.Tap": "0.2.0-*",
     "StructureMap": "4.4.2",
     "Unity": "4.0.1"
   }

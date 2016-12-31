@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Smooth.IoC.Cqrs.Query
 {
-    public interface IQueryHandler<in TQuery, TResult> : IDisposable 
+    public interface IQuerySingleHandler<in TQuery, TResult> : IDisposable 
         where TQuery : IQuery
         where TResult : class
     {
@@ -13,14 +12,13 @@ namespace Smooth.IoC.Cqrs.Query
         /// </summary>
         /// <param name="query">Query to execute.</param>
         /// <returns>Task which will be completed once the query has been executed.</returns>
-        Task<IEnumerable<TResult>> QueryAsync(TQuery query);
+        Task<TResult> QuerySingleOrDefaultAsync(TQuery query);
 
         /// <summary>
         /// Execute a query synchronously.
         /// </summary>
         /// <param name="query">Query to execute.</param>
         /// <returns>Task which will be completed once the query has been executed.</returns>
-        IEnumerable<TResult> Query(TQuery query);
-        
+        TResult QuerySingleOrDefault(TQuery query);
     }
 }

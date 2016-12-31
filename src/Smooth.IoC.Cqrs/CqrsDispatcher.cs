@@ -42,11 +42,7 @@ namespace Smooth.IoC.Cqrs
         {
             return _queryDispatcher.QueryAsync<TResult>();
         }
-        public Task<IEnumerable<TResult>> QueryAsync<TQuery, TResult>() where TQuery : IQuery where TResult : class
-        {
-            return  _queryDispatcher.QueryAsync<TQuery, TResult>();
-        }
-
+        
         public Task<IEnumerable<TResult>> QueryAsync<TQuery, TResult>(TQuery query) where TQuery : IQuery where TResult : class
         {
             return  _queryDispatcher.QueryAsync<TQuery, TResult>(query);
@@ -60,11 +56,6 @@ namespace Smooth.IoC.Cqrs
         public IEnumerable<TResult> Query<TResult>() where TResult : class
         {
             return _queryDispatcher.Query<TResult>();
-        }
-
-        public IEnumerable<TResult> Query<TQuery, TResult>() where TQuery : IQuery where TResult : class
-        {
-            return _queryDispatcher.Query<TQuery, TResult>();
         }
 
         public IEnumerable<TResult> Query<TQuery, TResult>(TQuery query) where TQuery : IQuery where TResult : class

@@ -16,7 +16,7 @@ namespace Smooth.IoC.Cqrs.Tests.TestHelpers.Queries
 
         public Task<IEnumerable<MyResultModel>> QueryAsync()
         {
-            return _dispatcher.QueryAsync<MyQueryModel, MyResultModel>();
+            return _dispatcher.QueryAsync<MyResultModel>();
         }
 
         public Task<IEnumerable<MyResultModel>> QueryAsync(MyQueryModel query)
@@ -31,7 +31,7 @@ namespace Smooth.IoC.Cqrs.Tests.TestHelpers.Queries
 
         public IEnumerable<MyResultModel> Query()
         {
-            return _dispatcher.QueryAsync<MyQueryModel, MyResultModel>().Result;
+            return _dispatcher.QueryAsync<MyResultModel>().Result;
         }
 
         public IEnumerable<MyResultModel> Query(MyQueryModel query)
