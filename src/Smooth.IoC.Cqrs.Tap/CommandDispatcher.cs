@@ -21,7 +21,7 @@ namespace Smooth.IoC.Cqrs.Tap
             {
                 throw new ArgumentNullException(nameof(command));
             }
-            using (var handler = _factory.Resolve<TCommand>())
+            using (var handler = _factory.ResolveCommand<TCommand>())
             {
                 if (handler == null)
                 {

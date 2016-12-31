@@ -5,6 +5,9 @@ namespace Smooth.IoC.Cqrs.Query
 {
     public interface IQueryDispatcher
     {
+        Task<IEnumerable<TResult>> QueryAsync<TResult>()
+            where TResult : class;
+
         Task<IEnumerable<TResult>> QueryAsync<TQuery, TResult>()
             where TQuery : IQuery
             where TResult : class;
@@ -15,6 +18,9 @@ namespace Smooth.IoC.Cqrs.Query
 
         Task<TResult> QuerySingleOrDefaultAsync<TQuery, TResult>(TQuery query)
             where TQuery : IQuery
+            where TResult : class;
+
+        IEnumerable<TResult> Query<TResult>()
             where TResult : class;
 
         IEnumerable<TResult> Query<TQuery, TResult>()

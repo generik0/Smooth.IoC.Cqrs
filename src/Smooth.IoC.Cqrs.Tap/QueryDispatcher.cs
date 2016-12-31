@@ -15,6 +15,18 @@ namespace Smooth.IoC.Cqrs.Tap
             _factory = factory;
         }
 
+        public Task<IEnumerable<TResult>> QueryAsync<TResult>() where TResult : class
+        {
+            using (var handler = _factory.ResolveQuery< TResult>())
+            {
+                if (handler == null)
+                {
+                    throw new RequestHandlerNotFoundException("QueryAsync failed");
+                }
+                return handler.QueryAsync();
+            }
+        }
+
         public Task<IEnumerable<TResult>> QueryAsync<TQuery, TResult>() where TQuery : IQuery where TResult : class
         {
             using (var handler = _factory.ResolveQuery<TQuery, TResult>())
@@ -57,6 +69,11 @@ namespace Smooth.IoC.Cqrs.Tap
                 }
                 return handler.QuerySingleOrDefaultAsync(query);
             }
+        }
+
+        public IEnumerable<TResult> Query<TResult>() where TResult : class
+        {
+            return QueryAsync<TResult>().Result;
         }
 
         public IEnumerable<TResult> Query<TQuery, TResult>() where TQuery : IQuery where TResult : class

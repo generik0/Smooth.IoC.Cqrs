@@ -12,11 +12,14 @@ namespace Smooth.IoC.Cqrs
             where TRequest : IRequest
             where TReply : IComparable;
 
-        ICommandHandler<TCommand> Resolve<TCommand>()
+        ICommandHandler<TCommand> ResolveCommand<TCommand>()
             where TCommand : ICommand;
 
         IQueryHandler<TQuery, TResult> ResolveQuery<TQuery, TResult>()
             where TQuery : IQuery
+            where TResult : class;
+
+        IQueryHandler<TResult> ResolveQuery<TResult>()
             where TResult : class;
 
         void Release(IDisposable instance);
