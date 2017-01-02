@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "0.2.0-*",
   "title": "Smooth.IoC.Cqrs.Tasks",
   "authors": [ "Generik0" ],
@@ -60,7 +60,7 @@
     "nowarn": [ "CS1591" ]
   },
   "dependencies": {
-    "NETStandard.Library": "1.6.0",
+    "NETStandard.Library": "1.6.1",
     "Smooth.IoC.Cqrs": "0.2.0-*"
   }
 }
