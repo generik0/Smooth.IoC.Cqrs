@@ -32,9 +32,21 @@ namespace Smooth.IoC.Cqrs.Tap
             }
         }
 
+
         public void Execute<TCommand>(TCommand command) where TCommand : ICommand
         {
-            ExecuteAsync(command).RunSynchronously();
+            if (command == null)
+            {
+                throw new ArgumentNullException(nameof(command));
+            }
+            using (var handler = _factory.ResolveCommand<TCommand>())
+            {
+                if (handler == null)
+                {
+                    throw new CommandHandlerNotFoundException(typeof(TCommand));
+                }
+                handler.Execute(command);
+            }
         }
     }
 }

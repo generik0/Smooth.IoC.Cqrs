@@ -21,7 +21,7 @@ namespace Smooth.IoC.Cqrs.Tap
             {
                 if (handler == null)
                 {
-                    throw new HandlerNotFoundException("QueryAsync failed");
+                    throw new QueryHandlerNotFoundException("QueryAsync failed");
                 }
                 return handler.QueryAsync();
             }
@@ -37,7 +37,7 @@ namespace Smooth.IoC.Cqrs.Tap
             {
                 if (handler == null)
                 {
-                    throw new HandlerNotFoundException(typeof(TQuery));
+                    throw new QueryHandlerNotFoundException(typeof(TQuery));
                 }
                 return handler.QueryAsync(query);
             }
@@ -53,7 +53,7 @@ namespace Smooth.IoC.Cqrs.Tap
             {
                 if (handler == null)
                 {
-                    throw new HandlerNotFoundException(typeof(TQuery));
+                    throw new QueryHandlerNotFoundException(typeof(TQuery));
                 }
                 return handler.QuerySingleOrDefaultAsync(query);
             }
@@ -61,17 +61,46 @@ namespace Smooth.IoC.Cqrs.Tap
 
         public IEnumerable<TResult> Query<TResult>() where TResult : class
         {
-            return QueryAsync<TResult>().Result;
+            using (var handler = _factory.ResolveQuery<TResult>())
+            {
+                if (handler == null)
+                {
+                    throw new QueryHandlerNotFoundException("QueryAsync failed");
+                }
+                return handler.Query();
+            }
         }
 
         public IEnumerable<TResult> Query<TQuery, TResult>(TQuery query) where TQuery : IQuery where TResult : class
         {
-            return QueryAsync<TQuery, TResult>(query).Result;
+            if (query == null)
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+            using (var handler = _factory.ResolveQuery<TQuery, TResult>())
+            {
+                if (handler == null)
+                {
+                    throw new QueryHandlerNotFoundException(typeof(TQuery));
+                }
+                return handler.Query(query);
+            }
         }
 
         public TResult QuerySingleOrDefault<TQuery, TResult>(TQuery query) where TQuery : IQuery where TResult : class
         {
-            return QuerySingleOrDefaultAsync<TQuery, TResult>(query).Result;
+            if (query == null)
+            {
+                throw new ArgumentNullException(nameof(query));
+            }
+            using (var handler = _factory.ResolveSingleQuery<TQuery, TResult>())
+            {
+                if (handler == null)
+                {
+                    throw new QueryHandlerNotFoundException(typeof(TQuery));
+                }
+                return handler.QuerySingleOrDefault(query);
+            }
         }
     }
 }

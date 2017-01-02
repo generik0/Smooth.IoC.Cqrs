@@ -25,7 +25,7 @@ namespace Smooth.IoC.Cqrs.Tap
             {
                 if (handler == null)
                 {
-                    throw new HandlerNotFoundException(typeof(TRequest));
+                    throw new RequestHandlerNotFoundException(typeof(TRequest));
                 }
                 return handler.ExecuteAsync(request);
             }
@@ -33,7 +33,18 @@ namespace Smooth.IoC.Cqrs.Tap
 
         public TReply Execute<TRequest, TReply>(TRequest request) where TRequest : IRequest where TReply : IComparable
         {
-            return ExecuteAsync<TRequest, TReply>(request).Result;
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+            using (var handler = _factory.ResolveRequest<TRequest, TReply>())
+            {
+                if (handler == null)
+                {
+                    throw new RequestHandlerNotFoundException(typeof(TRequest));
+                }
+                return handler.Execute(request);
+            }
         }
 
         public Task<TReply> ExecuteAsync<TReply>() where TReply : IComparable
@@ -42,7 +53,7 @@ namespace Smooth.IoC.Cqrs.Tap
             {
                 if (handler == null)
                 {
-                    throw new HandlerNotFoundException("ExecuteAsync failed");
+                    throw new RequestHandlerNotFoundException("ExecuteAsync failed");
                 }
                 return handler.ExecuteAsync();
             }
@@ -50,7 +61,14 @@ namespace Smooth.IoC.Cqrs.Tap
 
         public TReply Execute<TReply>() where TReply : IComparable
         {
-            return ExecuteAsync<TReply>().Result;
+            using (var handler = _factory.ResolveRequest<TReply>())
+            {
+                if (handler == null)
+                {
+                    throw new RequestHandlerNotFoundException("ExecuteAsync failed");
+                }
+                return handler.Execute();
+            }
         }
     }
 }
