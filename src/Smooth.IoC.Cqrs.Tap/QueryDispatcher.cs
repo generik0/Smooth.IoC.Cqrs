@@ -21,7 +21,7 @@ namespace Smooth.IoC.Cqrs.Tap
             {
                 if (handler == null)
                 {
-                    throw new RequestHandlerNotFoundException("QueryAsync failed");
+                    throw new HandlerNotFoundException("QueryAsync failed");
                 }
                 return handler.QueryAsync();
             }
@@ -37,7 +37,7 @@ namespace Smooth.IoC.Cqrs.Tap
             {
                 if (handler == null)
                 {
-                    throw new RequestHandlerNotFoundException(typeof(TQuery));
+                    throw new HandlerNotFoundException(typeof(TQuery));
                 }
                 return handler.QueryAsync(query);
             }
@@ -53,7 +53,7 @@ namespace Smooth.IoC.Cqrs.Tap
             {
                 if (handler == null)
                 {
-                    throw new RequestHandlerNotFoundException(typeof(TQuery));
+                    throw new HandlerNotFoundException(typeof(TQuery));
                 }
                 return handler.QuerySingleOrDefaultAsync(query);
             }

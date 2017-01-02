@@ -8,8 +8,9 @@ namespace Smooth.IoC.Cqrs.Requests
         where TReply : IComparable
     {
         Task<TReply> ExecuteAsync(TRequest request);
-
         TReply Execute(TRequest request);
+        Task<TReply> ExecuteAsync();
+        TReply Execute();
     }
    
 }

@@ -25,7 +25,7 @@ namespace Smooth.IoC.Cqrs.Tap
             {
                 if (handler == null)
                 {
-                    throw new RequestHandlerNotFoundException(typeof(TRequest));
+                    throw new HandlerNotFoundException(typeof(TRequest));
                 }
                 return handler.ExecuteAsync(request);
             }
@@ -34,6 +34,23 @@ namespace Smooth.IoC.Cqrs.Tap
         public TReply Execute<TRequest, TReply>(TRequest request) where TRequest : IRequest where TReply : IComparable
         {
             return ExecuteAsync<TRequest, TReply>(request).Result;
+        }
+
+        public Task<TReply> ExecuteAsync<TReply>() where TReply : IComparable
+        {
+            using (var handler = _factory.ResolveRequest<TReply>())
+            {
+                if (handler == null)
+                {
+                    throw new HandlerNotFoundException("ExecuteAsync failed");
+                }
+                return handler.ExecuteAsync();
+            }
+        }
+
+        public TReply Execute<TReply>() where TReply : IComparable
+        {
+            return ExecuteAsync<TReply>().Result;
         }
     }
 }

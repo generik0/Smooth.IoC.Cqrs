@@ -38,6 +38,14 @@ namespace Smooth.IoC.Cqrs
         {
             return _requestDispatcher.Execute<TRequest, TReply>(request);
         }
+        public Task<TReply> ExecuteAsync<TReply>() where TReply : IComparable
+        {
+            return _requestDispatcher.ExecuteAsync<TReply>();
+        }
+        public TReply Execute<TReply>() where TReply : IComparable
+        {
+            return _requestDispatcher.Execute<TReply>();
+        }
         public Task<IEnumerable<TResult>> QueryAsync<TResult>() where TResult : class
         {
             return _queryDispatcher.QueryAsync<TResult>();

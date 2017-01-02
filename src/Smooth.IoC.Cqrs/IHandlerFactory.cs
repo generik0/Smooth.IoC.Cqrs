@@ -12,6 +12,9 @@ namespace Smooth.IoC.Cqrs
             where TRequest : IRequest
             where TReply : IComparable;
 
+        IRequestHandler<TReply> ResolveRequest<TReply>()
+            where TReply : IComparable;
+
         ICommandHandler<TCommand> ResolveCommand<TCommand>()
             where TCommand : ICommand;
 

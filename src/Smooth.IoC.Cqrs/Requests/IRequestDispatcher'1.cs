@@ -12,5 +12,11 @@ namespace Smooth.IoC.Cqrs.Requests
         TReply Execute<TRequest, TReply>(TRequest request)
             where TRequest : IRequest
             where TReply : IComparable;
+
+        Task<TReply> ExecuteAsync<TReply>()
+            where TReply : IComparable;
+
+        TReply Execute<TReply>()
+            where TReply : IComparable;
     }
 }

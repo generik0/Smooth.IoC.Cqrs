@@ -22,5 +22,15 @@ namespace Smooth.IoC.Cqrs.Tests.TestHelpers.Requests
         {
             return ExecuteAsync(request).Result;
         }
+
+        public Task<MyReplyeEnum> ExecuteAsync()
+        {
+            return _dispatcher.ExecuteAsync<MyReplyeEnum>();
+        }
+
+        public MyReplyeEnum Execute()
+        {
+            return ExecuteAsync().Result;
+        }
     }
 }
