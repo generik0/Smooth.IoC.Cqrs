@@ -32,9 +32,9 @@ namespace Smooth.IoC.Cqrs.Commanding
         /// <summary>
         /// Gets unique identifier for this request (so that we can identify replies).
         /// </summary>
-        public Guid CommandId { get; }
+        public virtual Guid CommandId { get; }
 
-        public int Version { get; }
+        public virtual int Version { get; }
     }
 
 }

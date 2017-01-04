@@ -29,9 +29,9 @@ namespace Smooth.IoC.Cqrs.Requests
         /// <summary>
         /// Gets unique identifier for this request (so that we can identify replies).
         /// </summary>
-        public Guid RequestId { get; }
+        public virtual Guid RequestId { get; }
 
-        public int Version { get; }
+        public virtual int Version { get; }
     }
 
 }
