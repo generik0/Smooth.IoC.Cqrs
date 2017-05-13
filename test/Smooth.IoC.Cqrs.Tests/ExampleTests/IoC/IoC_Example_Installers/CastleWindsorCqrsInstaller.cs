@@ -10,7 +10,7 @@ using Smooth.IoC.Cqrs.Tests.TestHelpers;
 
 namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC.IoC_Example_Installers
 {
-    public class CastleWindsorInstaller : IWindsorInstaller
+    public class CastleWindsorCqrsInstaller : IWindsorInstaller
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {

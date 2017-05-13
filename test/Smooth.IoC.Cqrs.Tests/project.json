@@ -43,7 +43,7 @@
     "nowarn": [ "CS1591" ]
   },
   "dependencies": {
-    "Autofac": "4.2.1",
+    "Autofac": "4.5.0",
     "dotnet-test-nunit": "3.4.0-beta-3",
     "FakeItEasy": "2.3.2",
     "FluentAssertions": "4.18.0",

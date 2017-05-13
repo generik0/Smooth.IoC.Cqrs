@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Castle.Core.Internal;
-using Castle.MicroKernel.Registration;
-using Castle.MicroKernel.Resolvers.SpecializedResolvers;
-using Castle.Windsor;
+using System.Reflection;
+using Autofac;
 using FluentAssertions;
 using NUnit.Framework;
 using Smooth.IoC.Cqrs.Commanding;
@@ -19,32 +17,25 @@ using Smooth.IoC.Cqrs.Tests.TestHelpers.Requests;
 namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
 {
     [TestFixture]
-    public class CastleWindsorTasksTests
+    public class AutofacTasksTests
     {
-        private static IWindsorContainer _container;
+        private static IContainer _container;
 
         [SetUp]
         public void TestSetup()
         {
             if (_container != null) return;
 
-            _container = new WindsorContainer();
+            var builder  = new ContainerBuilder();
             Assert.DoesNotThrow(() =>
             {
-                _container.Install(new CastleWindsorCqrsInstaller());
-                _container.Kernel.Resolver.AddSubResolver(new CollectionResolver(_container.Kernel, true));
-                _container.Register(Classes.FromThisAssembly()
-                    .Where(t => t.GetInterfaces().Any(x => x != typeof(IDisposable))
-                                && !t.HasAttribute<NoIoCFluentRegistration>())
-                    .Unless(t => t.IsAbstract)
-                    .Configure(c =>
-                    {
-                        c.IsFallback();
-                    })
-                    .LifestyleTransient()
-                    .WithServiceAllInterfaces());
-            });
-            
+
+                builder.RegisterModule<AutofacCqrsRegistrationModule>();
+                    builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).AsImplementedInterfaces()
+                        .Where(t => t.GetInterfaces().Any(i => i != typeof(IDisposable)) && t.GetCustomAttribute<NoIoCFluentRegistration>() == null);
+                    _container = builder.Build();
+                });
+                Assert.That(_container.IsRegistered<ICqrsDispatcher>(), Is.True);
         }
 
 
@@ -79,7 +70,7 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
             {
                 Value = 3
             };
-            var handles = _container.ResolveAll<IHandler>();
+            var handles = _container.Resolve< IEnumerable<IHandler>>();
             var handle = handles.FirstOrDefault(x => x.IsHandel<MyCommandHandler>()) as MyCommandHandler;
             Assert.DoesNotThrowAsync(async () => await handle.ExecuteAsync(actual));
             actual.Value.Should().Be(4);
@@ -148,7 +139,7 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
             {
                 Value = 3
             };
-            var handles = _container.ResolveAll<IHandler>();
+            var handles = _container.Resolve< IEnumerable<IHandler>>();
             var handle = handles.FirstOrDefault(x => x.IsHandel<MyRequestHandler>()) as MyRequestHandler;
             var actual = MyReplyeEnum.Good;
             Assert.DoesNotThrowAsync(async () => actual = await handle.ExecuteAsync(request));
@@ -221,7 +212,7 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
             {
                 Value = 3
             };
-            var handles = _container.ResolveAll<IHandler>();
+            var handles = _container.Resolve< IEnumerable<IHandler>>();
             var handle = handles.FirstOrDefault(x => x.IsHandel<MyQueryHandler>()) as MyQueryHandler;
             IEnumerable<MyResultModel> results = null;
             Assert.DoesNotThrowAsync(async () => results = await handle.QueryAsync());
