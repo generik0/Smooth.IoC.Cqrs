@@ -27,7 +27,7 @@ Registration examples:
 
 Adding the registration:
 <pre><code>
-builder.RegisterModule<AutofacCqrsRegistrationModule>();
+builder.RegisterModule&lt;AutofacCqrsRegistrationModule&gt;();
 </pre></code>
 
 The regisration model (You can copy paste it):
@@ -36,18 +36,18 @@ public class AutofacCqrsRegistrationModule : Autofac.Module
 {
     protected override void Load(ContainerBuilder builder)
     {
-        builder.Register(c => new HandlerFactory(c.Resolve<IComponentContext>())).As<IHandlerFactory>().SingleInstance();
-        builder.RegisterType<CommandDispatcher>().As<ICommandDispatcher>().SingleInstance();
-        builder.RegisterType<RequestDispatcher>().As<IRequestDispatcher>().SingleInstance();
-        builder.RegisterType<QueryDispatcher>().As<IQueryDispatcher>().SingleInstance();
-        builder.RegisterType<CqrsDispatcher>().As<ICqrsDispatcher>().SingleInstance();
+        builder.Register(c =&gt; new HandlerFactory(c.Resolve&lt;IComponentContext&gt;())).As&lt;IHandlerFactory&gt;().SingleInstance();
+        builder.RegisterType&lt;CommandDispatcher&gt;().As&lt;ICommandDispatcher&gt;().SingleInstance();
+        builder.RegisterType&lt;RequestDispatcher&gt;().As&lt;IRequestDispatcher&gt;().SingleInstance();
+        builder.RegisterType&lt;QueryDispatcher&gt;().As&lt;IQueryDispatcher&gt;().SingleInstance();
+        builder.RegisterType&lt;CqrsDispatcher&gt;().As&lt;ICqrsDispatcher&gt;().SingleInstance();
         builder.RegisterAssemblyTypes(Assembly.GetCallingAssembly())
-            .AsClosedTypesOf(typeof(IRequestHandler<,>))
-            .AsClosedTypesOf(typeof(IRequestHandler<>))
-            .AsClosedTypesOf(typeof(ICommandHandler<>))
-            .AsClosedTypesOf(typeof(IQueryHandler<,>))
-            .AsClosedTypesOf(typeof(IQueryHandler<>))
-            .AsClosedTypesOf(typeof(IQuerySingleHandler<,>))
+            .AsClosedTypesOf(typeof(IRequestHandler&lt;,&gt;))
+            .AsClosedTypesOf(typeof(IRequestHandler&lt;&gt;))
+            .AsClosedTypesOf(typeof(ICommandHandler&lt;&gt;))
+            .AsClosedTypesOf(typeof(IQueryHandler&lt;,&gt;))
+            .AsClosedTypesOf(typeof(IQueryHandler&lt;&gt;))
+            .AsClosedTypesOf(typeof(IQuerySingleHandler&lt;,&gt;))
             .InstancePerDependency()
             .PreserveExistingDefaults();
     }
@@ -60,32 +60,32 @@ public class AutofacCqrsRegistrationModule : Autofac.Module
         {
             _container = container;
         }
-        public IRequestHandler<TRequest, TReply> ResolveRequest<TRequest, TReply>()
+        public IRequestHandler&lt;TRequest, TReply&gt; ResolveRequest&lt;TRequest, TReply&gt;()
             where TRequest : IRequest where TReply : IComparable
         {
-            return _container.Resolve<IRequestHandler<TRequest, TReply>>();
+            return _container.Resolve&lt;IRequestHandler&lt;TRequest, TReply&gt;&gt;();
         }
-        public IRequestHandler<TReply> ResolveRequest<TReply>() where TReply : IComparable
+        public IRequestHandler&lt;TReply&gt; ResolveRequest&lt;TReply&gt;() where TReply : IComparable
         {
-            return _container.Resolve<IRequestHandler<TReply>>();
+            return _container.Resolve&lt;IRequestHandler&lt;TReply&gt;&gt;();
         }
-        public ICommandHandler<TCommand> ResolveCommand<TCommand>() where TCommand : ICommand
+        public ICommandHandler&lt;TCommand&gt; ResolveCommand&lt;TCommand&gt;() where TCommand : ICommand
         {
-            return _container.Resolve<ICommandHandler<TCommand>>();
+            return _container.Resolve&lt;ICommandHandler&lt;TCommand&gt;&gt;();
         }
-        public IQueryHandler<TQuery, TResult> ResolveQuery<TQuery, TResult>()
+        public IQueryHandler&lt;TQuery, TResult&gt; ResolveQuery&lt;TQuery, TResult&gt;()
             where TQuery : IQuery where TResult : class
         {
-            return _container.Resolve<IQueryHandler<TQuery, TResult>>();
+            return _container.Resolve&lt;IQueryHandler&lt;TQuery, TResult&gt;&gt;();
         }
-        public IQueryHandler<TResult> ResolveQuery<TResult>() where TResult : class
+        public IQueryHandler&lt;TResult&gt; ResolveQuery&lt;TResult&gt;() where TResult : class
         {
-            return _container.Resolve<IQueryHandler<TResult>>();
+            return _container.Resolve&lt;IQueryHandler&lt;TResult&gt;&gt;();
         }
-        public IQuerySingleHandler<TQuery, TResult> ResolveSingleQuery<TQuery, TResult>()
+        public IQuerySingleHandler&lt;TQuery, TResult&gt; ResolveSingleQuery&lt;TQuery, TResult&gt;()
             where TQuery : IQuery where TResult : class
         {
-            return _container.Resolve<IQuerySingleHandler<TQuery, TResult>>();
+            return _container.Resolve&lt;IQuerySingleHandler&lt;TQuery, TResult&gt;&gt;();
         }
         public void Release(IDisposable instance)
         {
@@ -103,9 +103,9 @@ Adding the registration:
 _container.Install(new CastleWindsorCqrsInstaller());
     _container.Kernel.Resolver.AddSubResolver(new CollectionResolver(_container.Kernel, true));
     _container.Register(Classes.FromThisAssembly()
-        .Where(t => t.GetInterfaces().Any(x => x != typeof(IDisposable))
-        .Unless(t => t.IsAbstract)
-        .Configure(c =>
+        .Where(t =&gt; t.GetInterfaces().Any(x =&gt; x != typeof(IDisposable))
+        .Unless(t =&gt; t.IsAbstract)
+        .Configure(c =&gt;
         {
             c.IsFallback();
         })
@@ -119,15 +119,15 @@ public class CastleWindsorCqrsInstaller : IWindsorInstaller
 {
     public void Install(IWindsorContainer container, IConfigurationStore store)
     {
-        if (FacilityHelper.DoesKernelNotAlreadyContainFacility<TypedFactoryFacility>(container))
+        if (FacilityHelper.DoesKernelNotAlreadyContainFacility&lt;TypedFactoryFacility&gt;(container))
         {
-            container.Kernel.AddFacility<TypedFactoryFacility>();
+            container.Kernel.AddFacility&lt;TypedFactoryFacility&gt;();
         }
-        container.Register(Component.For<IHandlerFactory>().AsFactory());
-        container.Register(Component.For<ICommandDispatcher>().ImplementedBy<CommandDispatcher>());
-        container.Register(Component.For<IRequestDispatcher>().ImplementedBy<RequestDispatcher>());
-        container.Register(Component.For<IQueryDispatcher>().ImplementedBy<QueryDispatcher>());
-        container.Register(Component.For<ICqrsDispatcher>().ImplementedBy<CqrsDispatcher>());
+        container.Register(Component.For&lt;IHandlerFactory&gt;().AsFactory());
+        container.Register(Component.For&lt;ICommandDispatcher&gt;().ImplementedBy&lt;CommandDispatcher&gt;());
+        container.Register(Component.For&lt;IRequestDispatcher&gt;().ImplementedBy&lt;RequestDispatcher&gt;());
+        container.Register(Component.For&lt;IQueryDispatcher&gt;().ImplementedBy&lt;QueryDispatcher&gt;());
+        container.Register(Component.For&lt;ICqrsDispatcher&gt;().ImplementedBy&lt;CqrsDispatcher&gt;());
     }
 }
 </pre></code>
