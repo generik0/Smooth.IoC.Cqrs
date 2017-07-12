@@ -15,9 +15,33 @@ namespace Smooth.IoC.Cqrs.Tap
             _factory = factory;
         }
 
+        public IQueryHandler<TResult> GetQueryHandler<TResult>()
+            where TResult : class 
+        {
+            return _factory.ResolveQuery<TResult>();
+        }
+
+        public IQueryHandler<TQuery,TResult> GetQueryHandler<TQuery, TResult>()
+            where TQuery : IQuery where TResult : class
+        {
+            return _factory.ResolveQuery<TQuery,TResult>();
+        }
+
+        public IQuerySingleHandler<TResult> GetSingleOrDefaultQueryHandler<TResult>()
+            where TResult : class
+        {
+            return _factory.ResolveSingleQuery<TResult>();
+        }
+
+        public IQuerySingleHandler<TQuery, TResult> GetSingleOrDefaultQueryHandler<TQuery, TResult>()
+            where TQuery : IQuery where TResult : class
+        {
+            return _factory.ResolveSingleQuery<TQuery, TResult>();
+        }
+
         public Task<IEnumerable<TResult>> QueryAsync<TResult>() where TResult : class
         {
-            using (var handler = _factory.ResolveQuery< TResult>())
+            using (var handler = GetQueryHandler<TResult>())
             {
                 if (handler == null)
                 {
@@ -33,7 +57,7 @@ namespace Smooth.IoC.Cqrs.Tap
             {
                 throw new ArgumentNullException(nameof(query));
             }
-            using (var handler = _factory.ResolveQuery<TQuery, TResult>())
+            using (var handler = GetQueryHandler<TQuery, TResult>())
             {
                 if (handler == null)
                 {
@@ -49,7 +73,7 @@ namespace Smooth.IoC.Cqrs.Tap
             {
                 throw new ArgumentNullException(nameof(query));
             }
-            using (var handler = _factory.ResolveSingleQuery<TQuery, TResult>())
+            using (var handler = GetSingleOrDefaultQueryHandler<TQuery, TResult>())
             {
                 if (handler == null)
                 {
@@ -61,7 +85,7 @@ namespace Smooth.IoC.Cqrs.Tap
 
         public IEnumerable<TResult> Query<TResult>() where TResult : class
         {
-            using (var handler = _factory.ResolveQuery<TResult>())
+            using (var handler = GetQueryHandler<TResult>())
             {
                 if (handler == null)
                 {
@@ -77,7 +101,7 @@ namespace Smooth.IoC.Cqrs.Tap
             {
                 throw new ArgumentNullException(nameof(query));
             }
-            using (var handler = _factory.ResolveQuery<TQuery, TResult>())
+            using (var handler = GetQueryHandler<TQuery, TResult>())
             {
                 if (handler == null)
                 {
@@ -93,7 +117,7 @@ namespace Smooth.IoC.Cqrs.Tap
             {
                 throw new ArgumentNullException(nameof(query));
             }
-            using (var handler = _factory.ResolveSingleQuery<TQuery, TResult>())
+            using (var handler = GetSingleOrDefaultQueryHandler<TQuery, TResult>())
             {
                 if (handler == null)
                 {
@@ -105,7 +129,7 @@ namespace Smooth.IoC.Cqrs.Tap
 
         public TResult QuerySingleOrDefault<TResult>()  where TResult : class
         {
-            using (var handler = _factory.ResolveSingleQuery<TResult>())
+            using (var handler = GetSingleOrDefaultQueryHandler<TResult>())
             {
                 if (handler == null)
                 {

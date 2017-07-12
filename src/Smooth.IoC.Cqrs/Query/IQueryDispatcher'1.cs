@@ -27,5 +27,20 @@ namespace Smooth.IoC.Cqrs.Query
             where TQuery : IQuery
             where TResult : class;
 
+        TResult QuerySingleOrDefault<TResult>()
+            where TResult : class;
+
+        IQueryHandler<TResult> GetQueryHandler<TResult>()
+            where TResult : class;
+
+        IQueryHandler<TQuery, TResult> GetQueryHandler<TQuery, TResult>()
+            where TQuery : IQuery where TResult : class;
+
+        IQuerySingleHandler<TResult> GetSingleOrDefaultQueryHandler<TResult>()
+            where TResult : class;
+
+        IQuerySingleHandler<TQuery,TResult> GetSingleOrDefaultQueryHandler<TQuery, TResult>()
+            where TQuery : IQuery where TResult : class;
+
     }
 }
