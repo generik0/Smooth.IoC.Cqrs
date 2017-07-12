@@ -13,6 +13,19 @@ namespace Smooth.IoC.Cqrs.Tap
             _factory = factory;
         }
 
+        public IRequestHandler<TRequest, TReply> GetRequestHandler<TRequest, TReply>()
+            where TRequest : IRequest
+            where TReply : IComparable
+        {
+            return _factory.ResolveRequest<TRequest, TReply>();
+        }
+
+        public IRequestHandler<TReply> GetRequestHandler<TReply>()
+            where TReply : IComparable
+        {
+            return _factory.ResolveRequest<TReply>();
+        }
+
         public Task<TReply> ExecuteAsync<TRequest, TReply>(TRequest request)
             where TRequest : IRequest
             where TReply : IComparable 
@@ -21,7 +34,7 @@ namespace Smooth.IoC.Cqrs.Tap
             {
                 throw new ArgumentNullException(nameof(request));
             }
-            using (var handler = _factory.ResolveRequest <TRequest, TReply>())
+            using (var handler = GetRequestHandler<TRequest, TReply>())
             {
                 if (handler == null)
                 {
@@ -37,7 +50,7 @@ namespace Smooth.IoC.Cqrs.Tap
             {
                 throw new ArgumentNullException(nameof(request));
             }
-            using (var handler = _factory.ResolveRequest<TRequest, TReply>())
+            using (var handler = GetRequestHandler<TRequest, TReply>())
             {
                 if (handler == null)
                 {
@@ -49,7 +62,7 @@ namespace Smooth.IoC.Cqrs.Tap
 
         public Task<TReply> ExecuteAsync<TReply>() where TReply : IComparable
         {
-            using (var handler = _factory.ResolveRequest<TReply>())
+            using (var handler = GetRequestHandler<TReply>())
             {
                 if (handler == null)
                 {
@@ -61,7 +74,7 @@ namespace Smooth.IoC.Cqrs.Tap
 
         public TReply Execute<TReply>() where TReply : IComparable
         {
-            using (var handler = _factory.ResolveRequest<TReply>())
+            using (var handler = GetRequestHandler<TReply>())
             {
                 if (handler == null)
                 {
