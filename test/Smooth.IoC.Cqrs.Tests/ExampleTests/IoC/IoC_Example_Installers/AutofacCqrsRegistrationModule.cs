@@ -74,6 +74,11 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC.IoC_Example_Installers
                 return _container.Resolve<IQuerySingleHandler<TQuery, TResult>>();
             }
 
+            public IQuerySingleHandler<TResult> ResolveSingleQuery<TResult>() where TResult : class
+            {
+                return _container.Resolve<IQuerySingleHandler<TResult>>();
+            }
+
             public void Release(IDisposable instance)
             {
                 instance.Dispose();

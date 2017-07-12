@@ -102,5 +102,17 @@ namespace Smooth.IoC.Cqrs.Tap
                 return handler.QuerySingleOrDefault(query);
             }
         }
+
+        public TResult QuerySingleOrDefault<TResult>()  where TResult : class
+        {
+            using (var handler = _factory.ResolveSingleQuery<TResult>())
+            {
+                if (handler == null)
+                {
+                    throw new QueryHandlerNotFoundException("QueryAsync failed");
+                }
+                return handler.QuerySingleOrDefault();
+            }
+        }
     }
 }

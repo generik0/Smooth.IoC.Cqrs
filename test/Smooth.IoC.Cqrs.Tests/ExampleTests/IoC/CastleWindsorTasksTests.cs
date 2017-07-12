@@ -229,6 +229,8 @@ namespace Smooth.IoC.Cqrs.Tests.ExampleTests.IoC
             Assert.DoesNotThrowAsync(async () => results = await handle.QueryAsync(query));
             results.First().Actual.Should().Be(4);
             MyResultModel result = null;
+            Assert.DoesNotThrowAsync(async () => result = await handle.QuerySingleOrDefaultAsync());
+            result.Actual.Should().Be(1);
             Assert.DoesNotThrowAsync(async () => result = await handle.QuerySingleOrDefaultAsync(query));
             result.Actual.Should().Be(4);
         }
