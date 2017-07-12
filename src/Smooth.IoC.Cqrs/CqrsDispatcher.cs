@@ -46,6 +46,17 @@ namespace Smooth.IoC.Cqrs
         {
             return _requestDispatcher.Execute<TReply>();
         }
+
+        public IRequestHandler<TRequest, TReply> GetRequestHandler<TRequest, TReply>() where TRequest : IRequest where TReply : IComparable
+        {
+            return _requestDispatcher.GetRequestHandler<TRequest, TReply>();
+        }
+
+        public IRequestHandler<TReply> GetRequestHandler<TReply>() where TReply : IComparable
+        {
+            return _requestDispatcher.GetRequestHandler<TReply>();
+        }
+
         public Task<IEnumerable<TResult>> QueryAsync<TResult>() where TResult : class
         {
             return _queryDispatcher.QueryAsync<TResult>();
@@ -74,6 +85,36 @@ namespace Smooth.IoC.Cqrs
         public TResult QuerySingleOrDefault<TQuery, TResult>(TQuery query) where TQuery : IQuery where TResult : class
         {
             return _queryDispatcher.QuerySingleOrDefault<TQuery, TResult>(query);
+        }
+
+        public TResult QuerySingleOrDefault<TResult>()  where TResult : class
+        {
+            return _queryDispatcher.QuerySingleOrDefault<TResult>();
+        }
+
+        public IQueryHandler<TResult> GetQueryHandler<TResult>() where TResult : class
+        {
+            return _queryDispatcher.GetQueryHandler<TResult>();
+        }
+
+        public IQueryHandler<TQuery, TResult> GetQueryHandler<TQuery, TResult>() where TQuery : IQuery where TResult : class
+        {
+            return _queryDispatcher.GetQueryHandler<TQuery, TResult>();
+        }
+
+        public IQuerySingleHandler<TResult> GetSingleOrDefaultQueryHandler<TResult>() where TResult : class
+        {
+            return _queryDispatcher.GetSingleOrDefaultQueryHandler<TResult>();
+        }
+
+        public IQuerySingleHandler<TQuery, TResult> GetSingleOrDefaultQueryHandler<TQuery, TResult>() where TQuery : IQuery where TResult : class
+        {
+            return _queryDispatcher.GetSingleOrDefaultQueryHandler<TQuery, TResult>();
+        }
+
+        public ICommandHandler<TCommand> GetCommandHandler<TCommand>() where TCommand : ICommand
+        {
+            return _commandDispatcher.GetCommandHandler<TCommand>();
         }
     }
 }
