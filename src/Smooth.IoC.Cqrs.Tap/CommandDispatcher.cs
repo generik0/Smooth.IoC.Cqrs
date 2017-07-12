@@ -5,7 +5,7 @@ using Smooth.IoC.Cqrs.Exceptions;
 
 namespace Smooth.IoC.Cqrs.Tap
 {
-    public class CommandDispatcher : ICommandDispatcher
+    public class CommandDispatcher  : ICommandDispatcher
     {
         private readonly IHandlerFactory _factory;
 
@@ -14,14 +14,20 @@ namespace Smooth.IoC.Cqrs.Tap
             _factory = factory;
         }
 
-        public Task ExecuteAsync<TCommand>(TCommand command)
+        public ICommandHandler<TCommand> GetCommandHandler<TCommand>()
+            where TCommand : ICommand
+        {
+            return _factory.ResolveCommand<TCommand>();
+        }
+
+        public virtual Task ExecuteAsync<TCommand>(TCommand command)
             where TCommand : ICommand
         {
             if (command == null)
             {
                 throw new ArgumentNullException(nameof(command));
             }
-            using (var handler = _factory.ResolveCommand<TCommand>())
+            using (var handler = GetCommandHandler<TCommand>())
             {
                 if (handler == null)
                 {
@@ -33,13 +39,13 @@ namespace Smooth.IoC.Cqrs.Tap
         }
 
 
-        public void Execute<TCommand>(TCommand command) where TCommand : ICommand
+        public virtual void Execute<TCommand>(TCommand command) where TCommand : ICommand
         {
             if (command == null)
             {
                 throw new ArgumentNullException(nameof(command));
             }
-            using (var handler = _factory.ResolveCommand<TCommand>())
+            using (var handler = GetCommandHandler<TCommand>())
             {
                 if (handler == null)
                 {
