@@ -41,12 +41,28 @@ public class AutofacCqrsRegistrationModule : Autofac.Module
         builder.RegisterType&lt;RequestDispatcher&gt;().As&lt;IRequestDispatcher&gt;().SingleInstance();
         builder.RegisterType&lt;QueryDispatcher&gt;().As&lt;IQueryDispatcher&gt;().SingleInstance();
         builder.RegisterType&lt;CqrsDispatcher&gt;().As&lt;ICqrsDispatcher&gt;().SingleInstance();
-        builder.RegisterAssemblyTypes(Assembly.GetCallingAssembly())
+        var assemblies=Assembly.GetEntryAssembily().GetAssemblies();
+        builder.RegisterAssemblyTypes(assemblies)
             .AsClosedTypesOf(typeof(IRequestHandler&lt;,&gt;))
+            .InstancePerDependency()
+            .PreserveExistingDefaults();
+        builder.RegisterAssemblyTypes(assemblies)
             .AsClosedTypesOf(typeof(IRequestHandler&lt;&gt;))
+            .InstancePerDependency()
+            .PreserveExistingDefaults();
+        builder.RegisterAssemblyTypes(assemblies)
             .AsClosedTypesOf(typeof(ICommandHandler&lt;&gt;))
+            .InstancePerDependency()
+            .PreserveExistingDefaults();
+         builder.RegisterAssemblyTypes(assemblies)
             .AsClosedTypesOf(typeof(IQueryHandler&lt;,&gt;))
+            .InstancePerDependency()
+            .PreserveExistingDefaults();
+          builder.RegisterAssemblyTypes(assemblies)
             .AsClosedTypesOf(typeof(IQueryHandler&lt;&gt;))
+            .InstancePerDependency()
+            .PreserveExistingDefaults();
+          builder.RegisterAssemblyTypes(assemblies)
             .AsClosedTypesOf(typeof(IQuerySingleHandler&lt;,&gt;))
             .InstancePerDependency()
             .PreserveExistingDefaults();
@@ -93,7 +109,7 @@ public class AutofacCqrsRegistrationModule : Autofac.Module
         }
     }
 }
-</code></pre>
+
 
 ## Castle Windsor Installer
 You only need to register the factory and the dispatchers. Castle factory will take care of all the rest:
