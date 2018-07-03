@@ -41,7 +41,7 @@ public class AutofacCqrsRegistrationModule : Autofac.Module
         builder.RegisterType&lt;RequestDispatcher&gt;().As&lt;IRequestDispatcher&gt;().SingleInstance();
         builder.RegisterType&lt;QueryDispatcher&gt;().As&lt;IQueryDispatcher&gt;().SingleInstance();
         builder.RegisterType&lt;CqrsDispatcher&gt;().As&lt;ICqrsDispatcher&gt;().SingleInstance();
-        var assemblies=Assembly.GetEntryAssembily().GetAssemblies();
+        var assemblies=AppDomain.CurrentDomain.GetAssemblies();
         builder.RegisterAssemblyTypes(assemblies)
             .AsClosedTypesOf(typeof(IRequestHandler&lt;,&gt;))
             .InstancePerDependency()
