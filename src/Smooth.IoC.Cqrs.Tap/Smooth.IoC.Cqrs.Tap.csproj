@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Description>The smoothest IoC CQRS factory using tasks. VS2015 or an equivalent build environment is recommended.</Description>
@@ -38,7 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Smooth.IoC.Cqrs" Version="0.3.1" />
+    <ProjectReference Include="..\Smooth.IoC.Cqrs\Smooth.IoC.Cqrs.csproj" />
   </ItemGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net461' ">
