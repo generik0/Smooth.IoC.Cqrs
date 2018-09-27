@@ -19,7 +19,7 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Smooth.IoC.Cqrs.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Smooth.IoC.Cqrs.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net4' ">
