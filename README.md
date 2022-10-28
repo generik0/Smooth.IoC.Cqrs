@@ -1,4 +1,4 @@
-![Project Icon](https://raw.githubusercontent.com/Generik0/Smooth.IoC.Cqrs/master/logo.jpg) Smooth.IoC.Dapper.Repository.UnitOfWork
+![Project Icon](https://raw.githubusercontent.com/Generik0/Smooth.IoC.Cqrs/master/logo.jpg) Smooth.IoC
 ===========================================
 
 [![generik0 VSTS Build Status](https://generik0.visualstudio.com/_apis/public/build/definitions/97e62cdf-8c46-48a2-bf7a-d40bf05a53eb/5/badge)
